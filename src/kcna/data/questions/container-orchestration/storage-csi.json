@@ -1,0 +1,254 @@
+[
+  {
+    "id": "co-csi-001",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "easy",
+    "question": "What does CSI stand for?",
+    "options": [
+      {"label": "a", "text": "Cluster Service Interface", "correct": false},
+      {"label": "b", "text": "Container Storage Interface", "correct": true},
+      {"label": "c", "text": "Cloud Storage Integration", "correct": false},
+      {"label": "d", "text": "Container System Interface", "correct": false}
+    ],
+    "explanation": "The Container Storage Interface is a standardized API for storage plugins so vendors can add drivers without forking Kubernetes."
+  },
+  {
+    "id": "co-csi-002",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "easy",
+    "question": "Which party typically provides a CSI driver for a given storage system?",
+    "options": [
+      {"label": "a", "text": "The storage vendor or community (out-of-tree plugin)", "correct": true},
+      {"label": "b", "text": "The Kubernetes core developers (in-tree driver)", "correct": false},
+      {"label": "c", "text": "kubelet alone", "correct": false},
+      {"label": "d", "text": "Cloud controller manager", "correct": false}
+    ],
+    "explanation": "CSI was introduced precisely to move storage drivers out of Kubernetes core. Vendors maintain and ship their own out-of-tree CSI drivers."
+  },
+  {
+    "id": "co-csi-003",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which feature of CSI enables taking a point-in-time copy of a volume through Kubernetes APIs?",
+    "options": [
+      {"label": "a", "text": "VolumeSnapshot", "correct": true},
+      {"label": "b", "text": "VolumeClone", "correct": false},
+      {"label": "c", "text": "VolumeBackup", "correct": false},
+      {"label": "d", "text": "VolumeArchive", "correct": false}
+    ],
+    "explanation": "The VolumeSnapshot feature (VolumeSnapshotClass, VolumeSnapshot, VolumeSnapshotContent) is standard across CSI drivers that support it."
+  },
+  {
+    "id": "co-csi-004",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which feature lets you grow a PVC's storage without recreating the workload (when the CSI driver supports it)?",
+    "options": [
+      {"label": "a", "text": "Volume expansion via allowVolumeExpansion on the StorageClass", "correct": true},
+      {"label": "b", "text": "emptyDir enlargement", "correct": false},
+      {"label": "c", "text": "NodePort resize", "correct": false},
+      {"label": "d", "text": "Helm upgrade", "correct": false}
+    ],
+    "explanation": "Setting allowVolumeExpansion: true on the StorageClass, combined with a CSI driver that supports expansion, enables online PVC growth."
+  },
+  {
+    "id": "co-csi-005",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "easy",
+    "question": "What is the role of the CSI external-provisioner sidecar?",
+    "options": [
+      {"label": "a", "text": "It watches PVCs and calls the CSI driver's CreateVolume/DeleteVolume RPCs", "correct": true},
+      {"label": "b", "text": "It terminates TLS on the PVC", "correct": false},
+      {"label": "c", "text": "It runs the workload container", "correct": false},
+      {"label": "d", "text": "It manages nodes", "correct": false}
+    ],
+    "explanation": "CSI sidecars (external-provisioner, attacher, resizer, snapshotter) live beside the CSI driver and bridge Kubernetes APIs to CSI RPCs."
+  },
+  {
+    "id": "co-csi-006",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which statement about dynamic provisioning is TRUE?",
+    "options": [
+      {"label": "a", "text": "A PVC referencing a StorageClass with a provisioner triggers the CSI driver to create a matching PV on demand", "correct": true},
+      {"label": "b", "text": "An admin must pre-create every PV", "correct": false},
+      {"label": "c", "text": "PVs can only exist statically", "correct": false},
+      {"label": "d", "text": "Dynamic provisioning is only for emptyDir", "correct": false}
+    ],
+    "explanation": "Dynamic provisioning is the default modern flow. Static PVs are still possible for pre-existing storage you want to expose."
+  },
+  {
+    "id": "co-csi-007",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which CSI feature lets PVCs be scheduled only where topology constraints (zone, Node labels) allow the volume to attach?",
+    "options": [
+      {"label": "a", "text": "Topology-aware provisioning with WaitForFirstConsumer", "correct": true},
+      {"label": "b", "text": "Pod affinity", "correct": false},
+      {"label": "c", "text": "NodeSelector", "correct": false},
+      {"label": "d", "text": "TaintBasedEviction", "correct": false}
+    ],
+    "explanation": "Topology-aware provisioning ensures a block volume is created in the same zone as the Pod that will consume it."
+  },
+  {
+    "id": "co-csi-008",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "hard",
+    "question": "Which field on a StorageClass controls whether volumes created from it are deleted or retained when their PVC is released?",
+    "options": [
+      {"label": "a", "text": "reclaimPolicy", "correct": true},
+      {"label": "b", "text": "volumeBindingMode", "correct": false},
+      {"label": "c", "text": "allowVolumeExpansion", "correct": false},
+      {"label": "d", "text": "mountOptions", "correct": false}
+    ],
+    "explanation": "reclaimPolicy on the StorageClass (Delete or Retain) determines whether Kubernetes instructs the CSI driver to delete the backing volume or leave it in place."
+  },
+  {
+    "id": "co-csi-009",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which Pod-level volume type fills the gap between container image and real persistent storage, remaining for the life of the Pod?",
+    "options": [
+      {"label": "a", "text": "emptyDir", "correct": true},
+      {"label": "b", "text": "persistentVolumeClaim", "correct": false},
+      {"label": "c", "text": "configMap", "correct": false},
+      {"label": "d", "text": "downwardAPI", "correct": false}
+    ],
+    "explanation": "emptyDir is created empty at Pod start and destroyed when the Pod ends — ephemeral but Pod-scoped, useful for scratch space."
+  },
+  {
+    "id": "co-csi-010",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a typical responsibility of a CSI driver?",
+    "options": [
+      {"label": "a", "text": "Image building", "correct": true},
+      {"label": "b", "text": "Volume provisioning", "correct": false},
+      {"label": "c", "text": "Attach/detach from Nodes", "correct": false},
+      {"label": "d", "text": "Filesystem mount/unmount", "correct": false}
+    ],
+    "explanation": "CSI is about volume lifecycle. Building images is a CI/registry concern, not CSI."
+  },
+  {
+    "id": "co-csi-011",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which CNCF graduated project pairs with CSI to manage cluster backups and restores?",
+    "options": [
+      {"label": "a", "text": "Velero", "correct": true},
+      {"label": "b", "text": "Thanos", "correct": false},
+      {"label": "c", "text": "Harbor", "correct": false},
+      {"label": "d", "text": "Cilium", "correct": false}
+    ],
+    "explanation": "Velero backs up Kubernetes objects and volume data (via CSI snapshots or restic/Kopia), enabling disaster recovery and migrations."
+  },
+  {
+    "id": "co-csi-012",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which access mode is usually supported by block-storage CSI drivers (EBS, GCE PD, Azure Disk) and not by file-storage drivers?",
+    "options": [
+      {"label": "a", "text": "ReadWriteOnce (RWO)", "correct": true},
+      {"label": "b", "text": "ReadWriteMany (RWX)", "correct": false},
+      {"label": "c", "text": "ReadOnlyMany (ROX)", "correct": false},
+      {"label": "d", "text": "ReadWriteOncePod (RWOP)", "correct": false}
+    ],
+    "explanation": "Block volumes almost always support RWO; multi-Node RWX typically requires a shared filesystem (EFS, NFS, CephFS)."
+  },
+  {
+    "id": "co-csi-013",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "hard",
+    "question": "What is the purpose of the `ephemeral inline CSI volume` feature?",
+    "options": [
+      {"label": "a", "text": "Allow CSI drivers to provide ephemeral Pod-scoped volumes defined directly in the Pod spec without a PVC", "correct": true},
+      {"label": "b", "text": "Automatically back up long-lived volumes", "correct": false},
+      {"label": "c", "text": "Encrypt Secrets at rest", "correct": false},
+      {"label": "d", "text": "Create PVs at cluster bootstrap", "correct": false}
+    ],
+    "explanation": "Inline CSI volumes enable drivers to serve ephemeral, Pod-bound volumes (e.g., for secret managers, config overlays) without the PV/PVC cycle."
+  },
+  {
+    "id": "co-csi-014",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which of the following is a correct path when a workload wants to bring its own cloud-vendor disk into Kubernetes?",
+    "options": [
+      {"label": "a", "text": "Create a PV that references the existing disk, and create a matching PVC", "correct": true},
+      {"label": "b", "text": "Use an init container to attach the disk", "correct": false},
+      {"label": "c", "text": "Edit the Node spec", "correct": false},
+      {"label": "d", "text": "Add the disk to the Pod hostPath", "correct": false}
+    ],
+    "explanation": "Static provisioning binds a PVC to a pre-created PV that references a specific disk volumeHandle. It is the standard way to expose existing storage."
+  },
+  {
+    "id": "co-csi-015",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which part of the CSI architecture runs on every Node to attach/mount volumes?",
+    "options": [
+      {"label": "a", "text": "The Node plugin", "correct": true},
+      {"label": "b", "text": "The Controller plugin", "correct": false},
+      {"label": "c", "text": "etcd", "correct": false},
+      {"label": "d", "text": "kube-apiserver", "correct": false}
+    ],
+    "explanation": "CSI drivers run two logical components: a Controller plugin (typically a Deployment) and a Node plugin (DaemonSet) that handles per-Node attach/mount operations."
+  },
+  {
+    "id": "co-csi-016",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "hard",
+    "question": "Why is WaitForFirstConsumer volumeBindingMode recommended for topologically-constrained storage?",
+    "options": [
+      {"label": "a", "text": "It delays provisioning until the Pod is scheduled, so the volume is created in the correct zone/topology", "correct": true},
+      {"label": "b", "text": "It improves write throughput", "correct": false},
+      {"label": "c", "text": "It enables RWX mode", "correct": false},
+      {"label": "d", "text": "It eliminates the need for a PV", "correct": false}
+    ],
+    "explanation": "Immediate binding can provision a volume in a zone where no feasible Node exists. WaitForFirstConsumer aligns zone with Pod placement."
+  },
+  {
+    "id": "co-csi-017",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "medium",
+    "question": "Which statement about in-tree storage drivers is TRUE in modern Kubernetes?",
+    "options": [
+      {"label": "a", "text": "Most in-tree drivers have been migrated to CSI via CSI migration", "correct": true},
+      {"label": "b", "text": "In-tree drivers have been expanded", "correct": false},
+      {"label": "c", "text": "Kubernetes has no CSI support", "correct": false},
+      {"label": "d", "text": "CSI migration targeted emptyDir", "correct": false}
+    ],
+    "explanation": "CSI migration progressively redirects in-tree volume APIs (EBS, GCE PD, Azure Disk, etc.) to their CSI drivers so core can drop the in-tree code paths."
+  },
+  {
+    "id": "co-csi-018",
+    "domain": "container-orchestration",
+    "subtopic": "storage-csi",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT true about a PersistentVolumeClaim?",
+    "options": [
+      {"label": "a", "text": "It is cluster-scoped", "correct": true},
+      {"label": "b", "text": "It is a user request for storage of a particular size and access mode", "correct": false},
+      {"label": "c", "text": "It can trigger dynamic provisioning via a StorageClass", "correct": false},
+      {"label": "d", "text": "It binds to exactly one PV", "correct": false}
+    ],
+    "explanation": "PVCs are namespaced. PVs are cluster-scoped. A PVC binds 1:1 to a PV."
+  }
+]

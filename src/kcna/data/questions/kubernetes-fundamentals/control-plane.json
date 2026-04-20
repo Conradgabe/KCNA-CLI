@@ -1,0 +1,352 @@
+[
+  {
+    "id": "kf-ctrl-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "Which component stores the entire state of a Kubernetes cluster as a distributed key-value store?",
+    "options": [
+      {"label": "a", "text": "kubelet", "correct": false},
+      {"label": "b", "text": "etcd", "correct": true},
+      {"label": "c", "text": "kube-proxy", "correct": false},
+      {"label": "d", "text": "containerd", "correct": false}
+    ],
+    "explanation": "etcd is the strongly-consistent distributed key-value store used by the control plane to persist all API objects and cluster state."
+  },
+  {
+    "id": "kf-ctrl-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "Which component decides which node a newly-created Pod should run on?",
+    "options": [
+      {"label": "a", "text": "kubelet", "correct": false},
+      {"label": "b", "text": "kube-proxy", "correct": false},
+      {"label": "c", "text": "kube-scheduler", "correct": true},
+      {"label": "d", "text": "kube-controller-manager", "correct": false}
+    ],
+    "explanation": "The kube-scheduler watches for unscheduled Pods, filters feasible nodes, scores them, and assigns the Pod to the best node."
+  },
+  {
+    "id": "kf-ctrl-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "Which control-plane component is the single entry point for all REST interactions with the cluster?",
+    "options": [
+      {"label": "a", "text": "kube-apiserver", "correct": true},
+      {"label": "b", "text": "etcd", "correct": false},
+      {"label": "c", "text": "kubelet", "correct": false},
+      {"label": "d", "text": "kube-proxy", "correct": false}
+    ],
+    "explanation": "The kube-apiserver exposes the Kubernetes REST API and is the front-end of the control plane; every other component talks through it."
+  },
+  {
+    "id": "kf-ctrl-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which component runs control loops that continuously reconcile the actual state of the cluster with the desired state recorded in the API?",
+    "options": [
+      {"label": "a", "text": "kube-scheduler", "correct": false},
+      {"label": "b", "text": "kube-controller-manager", "correct": true},
+      {"label": "c", "text": "etcd", "correct": false},
+      {"label": "d", "text": "kubelet", "correct": false}
+    ],
+    "explanation": "kube-controller-manager runs built-in controllers (ReplicaSet, Deployment, Node, Endpoints, ServiceAccount, etc.) that reconcile state through the API server."
+  },
+  {
+    "id": "kf-ctrl-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which agent runs on every worker node and is responsible for starting containers described by PodSpecs?",
+    "options": [
+      {"label": "a", "text": "kubelet", "correct": true},
+      {"label": "b", "text": "kube-proxy", "correct": false},
+      {"label": "c", "text": "kube-scheduler", "correct": false},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "The kubelet is the primary node agent. It registers the node, watches the API server for PodSpecs, and instructs the container runtime to run containers."
+  },
+  {
+    "id": "kf-ctrl-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which component programs Linux iptables/ipvs rules on nodes so that Service virtual IPs route to the correct Pods?",
+    "options": [
+      {"label": "a", "text": "kube-apiserver", "correct": false},
+      {"label": "b", "text": "kubelet", "correct": false},
+      {"label": "c", "text": "kube-proxy", "correct": true},
+      {"label": "d", "text": "CoreDNS", "correct": false}
+    ],
+    "explanation": "kube-proxy runs on each node and maintains network rules that implement Service abstractions, forwarding traffic to the right backend Pods."
+  },
+  {
+    "id": "kf-ctrl-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which component integrates Kubernetes with an underlying cloud provider API (for load balancers, node lifecycle, routes, etc.)?",
+    "options": [
+      {"label": "a", "text": "cloud-controller-manager", "correct": true},
+      {"label": "b", "text": "kube-controller-manager", "correct": false},
+      {"label": "c", "text": "kubelet", "correct": false},
+      {"label": "d", "text": "kube-proxy", "correct": false}
+    ],
+    "explanation": "cloud-controller-manager isolates cloud-specific logic so that vendors can evolve integrations independently of the core project."
+  },
+  {
+    "id": "kf-ctrl-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "What is the default authorization mode on a vanilla upstream kube-apiserver (no flags set)?",
+    "options": [
+      {"label": "a", "text": "RBAC", "correct": false},
+      {"label": "b", "text": "AlwaysAllow", "correct": true},
+      {"label": "c", "text": "AlwaysDeny", "correct": false},
+      {"label": "d", "text": "ABAC", "correct": false}
+    ],
+    "explanation": "The upstream default is AlwaysAllow. Production installers (kubeadm, managed distributions) override this to Node,RBAC."
+  },
+  {
+    "id": "kf-ctrl-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "A developer runs `kubectl apply -f deployment.yaml`. Which component first receives the request?",
+    "options": [
+      {"label": "a", "text": "kube-scheduler", "correct": false},
+      {"label": "b", "text": "etcd", "correct": false},
+      {"label": "c", "text": "kube-apiserver", "correct": true},
+      {"label": "d", "text": "kubelet", "correct": false}
+    ],
+    "explanation": "All client requests go through the kube-apiserver; only it reads and writes etcd directly."
+  },
+  {
+    "id": "kf-ctrl-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "A Pod exists in the cluster but never schedules. The user sees the Pod stuck in Pending with no Node. Which component is most likely the cause?",
+    "options": [
+      {"label": "a", "text": "kubelet on the target node is down", "correct": false},
+      {"label": "b", "text": "kube-scheduler is down or cannot find a feasible node", "correct": true},
+      {"label": "c", "text": "CoreDNS is down", "correct": false},
+      {"label": "d", "text": "kube-proxy is down", "correct": false}
+    ],
+    "explanation": "A Pod remains Pending when no Node is assigned. That is the scheduler's job; either the scheduler is unhealthy or no node satisfies constraints/taints/resources."
+  },
+  {
+    "id": "kf-ctrl-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which statement about etcd is TRUE?",
+    "options": [
+      {"label": "a", "text": "etcd is optional and can be replaced with PostgreSQL", "correct": false},
+      {"label": "b", "text": "etcd serves reads and writes directly to kubectl clients", "correct": false},
+      {"label": "c", "text": "etcd is a strongly-consistent distributed key-value store accessed only through kube-apiserver", "correct": true},
+      {"label": "d", "text": "etcd provides service discovery by resolving DNS names for Pods", "correct": false}
+    ],
+    "explanation": "etcd backs the API server and must remain strongly consistent. Clients never talk to etcd directly; only kube-apiserver does."
+  },
+  {
+    "id": "kf-ctrl-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "hard",
+    "question": "How many etcd members are recommended in a highly-available control plane to tolerate one failure?",
+    "options": [
+      {"label": "a", "text": "1", "correct": false},
+      {"label": "b", "text": "2", "correct": false},
+      {"label": "c", "text": "3", "correct": true},
+      {"label": "d", "text": "4", "correct": false}
+    ],
+    "explanation": "etcd uses Raft quorum (N/2 + 1). Three members tolerate one failure; four provide no more fault tolerance than three while costing more write latency, so odd numbers are preferred."
+  },
+  {
+    "id": "kf-ctrl-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT a control-plane component?",
+    "options": [
+      {"label": "a", "text": "kube-apiserver", "correct": false},
+      {"label": "b", "text": "kube-scheduler", "correct": false},
+      {"label": "c", "text": "kubelet", "correct": true},
+      {"label": "d", "text": "kube-controller-manager", "correct": false}
+    ],
+    "explanation": "kubelet runs on every worker node, not on the control plane. The others are core control-plane components."
+  },
+  {
+    "id": "kf-ctrl-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which controller inside kube-controller-manager is responsible for creating replacement Pods when a Node becomes NotReady?",
+    "options": [
+      {"label": "a", "text": "NodeLifecycle controller", "correct": true},
+      {"label": "b", "text": "EndpointSlice controller", "correct": false},
+      {"label": "c", "text": "ServiceAccount controller", "correct": false},
+      {"label": "d", "text": "Job controller", "correct": false}
+    ],
+    "explanation": "The NodeLifecycle (Node) controller monitors node health, taints unhealthy nodes, and triggers eviction so higher-level controllers (Deployment/ReplicaSet) can place replacements."
+  },
+  {
+    "id": "kf-ctrl-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which component is responsible for cluster DNS inside a standard Kubernetes cluster?",
+    "options": [
+      {"label": "a", "text": "kube-proxy", "correct": false},
+      {"label": "b", "text": "kubelet", "correct": false},
+      {"label": "c", "text": "CoreDNS", "correct": true},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "CoreDNS is the default in-cluster DNS server, deployed as a Deployment and exposed through a kube-dns Service."
+  },
+  {
+    "id": "kf-ctrl-016",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "hard",
+    "question": "A workload calls another Service by its DNS name. Which node component turns the Service ClusterIP into a real Pod IP at the packet level?",
+    "options": [
+      {"label": "a", "text": "kubelet", "correct": false},
+      {"label": "b", "text": "CoreDNS", "correct": false},
+      {"label": "c", "text": "kube-proxy", "correct": true},
+      {"label": "d", "text": "kube-scheduler", "correct": false}
+    ],
+    "explanation": "CoreDNS returns the Service ClusterIP; kube-proxy rewrites packets (via iptables/ipvs/nftables) to land on one of the backing Pods."
+  },
+  {
+    "id": "kf-ctrl-017",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which statement about the Kubernetes API is TRUE?",
+    "options": [
+      {"label": "a", "text": "It is a binary gRPC protocol not usable from curl", "correct": false},
+      {"label": "b", "text": "It is a RESTful HTTP API organized into API groups and versions", "correct": true},
+      {"label": "c", "text": "It is proprietary and only accessible through kubectl", "correct": false},
+      {"label": "d", "text": "It uses XML-RPC", "correct": false}
+    ],
+    "explanation": "The Kubernetes API is HTTP+JSON (with optional Protocol Buffers) organized into groups (core, apps, batch, etc.) and versions (v1, v1beta1, v1alpha1)."
+  },
+  {
+    "id": "kf-ctrl-018",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "What mechanism lets users extend the Kubernetes API with new object kinds without forking the API server?",
+    "options": [
+      {"label": "a", "text": "Custom Resource Definitions (CRDs)", "correct": true},
+      {"label": "b", "text": "Helm charts", "correct": false},
+      {"label": "c", "text": "ConfigMaps", "correct": false},
+      {"label": "d", "text": "Ingress classes", "correct": false}
+    ],
+    "explanation": "CRDs register new kinds with the API server. Combined with a controller, they implement the Operator pattern."
+  },
+  {
+    "id": "kf-ctrl-019",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which statement best describes a Kubernetes controller?",
+    "options": [
+      {"label": "a", "text": "A CLI tool that reads YAML files", "correct": false},
+      {"label": "b", "text": "A control loop that watches the API for a resource kind and reconciles actual state toward desired state", "correct": true},
+      {"label": "c", "text": "A plugin for the container runtime", "correct": false},
+      {"label": "d", "text": "A replacement for systemd on the node", "correct": false}
+    ],
+    "explanation": "The controller pattern is central to Kubernetes: watch for changes, compare actual vs desired state, take corrective action, repeat."
+  },
+  {
+    "id": "kf-ctrl-020",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which component is NOT part of the data plane of a Kubernetes cluster?",
+    "options": [
+      {"label": "a", "text": "kubelet", "correct": false},
+      {"label": "b", "text": "kube-proxy", "correct": false},
+      {"label": "c", "text": "container runtime", "correct": false},
+      {"label": "d", "text": "kube-scheduler", "correct": true}
+    ],
+    "explanation": "kube-scheduler is a control-plane component. kubelet, kube-proxy, and the container runtime run on worker nodes and form the data plane."
+  },
+  {
+    "id": "kf-ctrl-021",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "Which admission mechanism intercepts API requests after authentication/authorization but before the object is persisted to etcd?",
+    "options": [
+      {"label": "a", "text": "Admission controllers", "correct": true},
+      {"label": "b", "text": "Resource quotas only", "correct": false},
+      {"label": "c", "text": "kube-proxy", "correct": false},
+      {"label": "d", "text": "kubelet webhooks", "correct": false}
+    ],
+    "explanation": "Admission controllers (mutating and validating) run inside the API server between authorization and persistence, enforcing policies and defaulting values."
+  },
+  {
+    "id": "kf-ctrl-022",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "hard",
+    "question": "Why must all control-plane components talk through kube-apiserver rather than directly to etcd?",
+    "options": [
+      {"label": "a", "text": "Because etcd cannot serialize JSON", "correct": false},
+      {"label": "b", "text": "To centralize authentication, authorization, admission, and schema validation of all writes", "correct": true},
+      {"label": "c", "text": "Because etcd is single-threaded", "correct": false},
+      {"label": "d", "text": "To avoid installing etcd client libraries on every component", "correct": false}
+    ],
+    "explanation": "The API server is the only component that should read/write etcd. Routing through it enforces access control, admission, schema validation, and a consistent watch stream."
+  },
+  {
+    "id": "kf-ctrl-023",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "easy",
+    "question": "Which command prints the health of core control-plane components?",
+    "options": [
+      {"label": "a", "text": "kubectl get pods -n kube-system", "correct": true},
+      {"label": "b", "text": "kubectl describe cluster", "correct": false},
+      {"label": "c", "text": "kubectl logs control-plane", "correct": false},
+      {"label": "d", "text": "kubectl stats", "correct": false}
+    ],
+    "explanation": "Core components usually run as static Pods in kube-system. Listing the namespace surfaces their status quickly."
+  },
+  {
+    "id": "kf-ctrl-024",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "medium",
+    "question": "What is a static Pod?",
+    "options": [
+      {"label": "a", "text": "A Pod managed directly by the kubelet from a local manifest file, not via the API server", "correct": true},
+      {"label": "b", "text": "A Pod that never restarts", "correct": false},
+      {"label": "c", "text": "A Pod on a read-only filesystem", "correct": false},
+      {"label": "d", "text": "A Pod created from a StatefulSet", "correct": false}
+    ],
+    "explanation": "The kubelet watches a directory (e.g., /etc/kubernetes/manifests) and runs any Pod spec it finds there. Control-plane components are often deployed this way."
+  },
+  {
+    "id": "kf-ctrl-025",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "control-plane",
+    "difficulty": "hard",
+    "question": "Which statement about leader election among control-plane replicas is TRUE?",
+    "options": [
+      {"label": "a", "text": "kube-apiserver elects a single leader that handles all writes", "correct": false},
+      {"label": "b", "text": "kube-controller-manager and kube-scheduler use leader election so only one active replica acts at a time", "correct": true},
+      {"label": "c", "text": "Leader election is performed by kubelet", "correct": false},
+      {"label": "d", "text": "etcd does not need leader election", "correct": false}
+    ],
+    "explanation": "Multiple replicas of kube-controller-manager and kube-scheduler run for availability; leader election (via a Lease) ensures only one is active. kube-apiserver is stateless and load-balanced."
+  }
+]

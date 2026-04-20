@@ -1,0 +1,254 @@
+[
+  {
+    "id": "co-mesh-001",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "easy",
+    "question": "Which two CNCF projects are commonly referenced as service meshes?",
+    "options": [
+      {"label": "a", "text": "Istio and Linkerd", "correct": true},
+      {"label": "b", "text": "Falco and Trivy", "correct": false},
+      {"label": "c", "text": "Argo and Flux", "correct": false},
+      {"label": "d", "text": "Prometheus and Grafana", "correct": false}
+    ],
+    "explanation": "Istio and Linkerd are both CNCF-graduated service meshes. Others include Consul Connect, Kuma, and newer entrants."
+  },
+  {
+    "id": "co-mesh-002",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "easy",
+    "question": "In a service mesh, what is the role of the control plane?",
+    "options": [
+      {"label": "a", "text": "Compile high-level policy and configuration into proxy config and distribute certificates/identity", "correct": true},
+      {"label": "b", "text": "Intercept data-plane traffic directly", "correct": false},
+      {"label": "c", "text": "Run application business logic", "correct": false},
+      {"label": "d", "text": "Provide container runtimes", "correct": false}
+    ],
+    "explanation": "The control plane (e.g., istiod, Linkerd control plane) watches the cluster API, configures proxies, and handles identity/cert issuance. It does not carry data plane traffic."
+  },
+  {
+    "id": "co-mesh-003",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "easy",
+    "question": "In a service mesh, what is the role of the data plane?",
+    "options": [
+      {"label": "a", "text": "The set of proxies that actually intercept and route application traffic", "correct": true},
+      {"label": "b", "text": "The etcd cluster that backs mesh state", "correct": false},
+      {"label": "c", "text": "The kubelet on each Node", "correct": false},
+      {"label": "d", "text": "The Ingress controller", "correct": false}
+    ],
+    "explanation": "Envoy sidecars (in Istio sidecar mode) or per-node proxies form the data plane, intercepting L4/L7 traffic and applying policy."
+  },
+  {
+    "id": "co-mesh-004",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which of the following is a common feature provided by a service mesh?",
+    "options": [
+      {"label": "a", "text": "Automatic mTLS between workloads", "correct": true},
+      {"label": "b", "text": "Pod scheduling decisions", "correct": false},
+      {"label": "c", "text": "Container image scanning", "correct": false},
+      {"label": "d", "text": "CNI policy enforcement", "correct": false}
+    ],
+    "explanation": "Service meshes commonly provide mTLS, retries, circuit breaking, traffic shifting, and rich telemetry — all transparent to application code."
+  },
+  {
+    "id": "co-mesh-005",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which proxy is at the heart of Istio's data plane?",
+    "options": [
+      {"label": "a", "text": "Envoy", "correct": true},
+      {"label": "b", "text": "HAProxy", "correct": false},
+      {"label": "c", "text": "NGINX", "correct": false},
+      {"label": "d", "text": "Traefik", "correct": false}
+    ],
+    "explanation": "Envoy is the CNCF-graduated high-performance L4/L7 proxy that Istio uses as its data plane."
+  },
+  {
+    "id": "co-mesh-006",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which service mesh is known for a lightweight Rust-based per-node proxy (no Envoy sidecar) and strong simplicity?",
+    "options": [
+      {"label": "a", "text": "Linkerd", "correct": true},
+      {"label": "b", "text": "Istio", "correct": false},
+      {"label": "c", "text": "Consul Connect", "correct": false},
+      {"label": "d", "text": "Kuma", "correct": false}
+    ],
+    "explanation": "Linkerd uses a minimal Rust proxy (`linkerd2-proxy`), not Envoy, and focuses on simplicity and performance."
+  },
+  {
+    "id": "co-mesh-007",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which traffic-shifting strategy routes a small percentage of requests to a new version to validate it before full rollout?",
+    "options": [
+      {"label": "a", "text": "Canary", "correct": true},
+      {"label": "b", "text": "Blue/green", "correct": false},
+      {"label": "c", "text": "Rolling", "correct": false},
+      {"label": "d", "text": "Recreate", "correct": false}
+    ],
+    "explanation": "A canary gradually shifts traffic from v1 to v2 (e.g., 95/5 → 50/50 → 100%). Service meshes excel at this because proxies can split by weight and headers."
+  },
+  {
+    "id": "co-mesh-008",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT typically a service-mesh responsibility?",
+    "options": [
+      {"label": "a", "text": "Pod scheduling", "correct": true},
+      {"label": "b", "text": "mTLS between services", "correct": false},
+      {"label": "c", "text": "Retries and timeouts", "correct": false},
+      {"label": "d", "text": "Traffic shifting", "correct": false}
+    ],
+    "explanation": "Scheduling is the kube-scheduler's job. Service meshes handle service-to-service traffic concerns."
+  },
+  {
+    "id": "co-mesh-009",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "hard",
+    "question": "Which Istio deployment mode avoids per-workload sidecars by using shared node and service-level proxies?",
+    "options": [
+      {"label": "a", "text": "Ambient Mesh mode", "correct": true},
+      {"label": "b", "text": "Sidecar mode", "correct": false},
+      {"label": "c", "text": "Headless mode", "correct": false},
+      {"label": "d", "text": "Daemon mode", "correct": false}
+    ],
+    "explanation": "Istio Ambient Mesh uses ztunnel (per-node L4 proxy) and waypoint proxies (per-service L7) instead of injecting Envoy sidecars into every Pod."
+  },
+  {
+    "id": "co-mesh-010",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which of the following is a reason to adopt a service mesh?",
+    "options": [
+      {"label": "a", "text": "Uniform mTLS, retries, and observability without changing application code", "correct": true},
+      {"label": "b", "text": "To replace CNI plugins", "correct": false},
+      {"label": "c", "text": "To avoid Kubernetes altogether", "correct": false},
+      {"label": "d", "text": "To remove the need for TLS", "correct": false}
+    ],
+    "explanation": "The primary value proposition is moving transport-level concerns out of application code and into a uniform sidecar/proxy layer."
+  },
+  {
+    "id": "co-mesh-011",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which of the following is TRUE about sidecar proxies?",
+    "options": [
+      {"label": "a", "text": "They run as additional containers in the same Pod as the application", "correct": true},
+      {"label": "b", "text": "They run on the control plane Nodes only", "correct": false},
+      {"label": "c", "text": "They replace the application container", "correct": false},
+      {"label": "d", "text": "They are required by every Pod in the cluster", "correct": false}
+    ],
+    "explanation": "A sidecar is an extra container in the Pod that shares its network namespace, intercepting the app's traffic for mesh features."
+  },
+  {
+    "id": "co-mesh-012",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "hard",
+    "question": "Which CNCF specification attempted to standardize service-mesh APIs across implementations (though it is now largely superseded)?",
+    "options": [
+      {"label": "a", "text": "Service Mesh Interface (SMI)", "correct": true},
+      {"label": "b", "text": "Gateway API", "correct": false},
+      {"label": "c", "text": "OCI Runtime Spec", "correct": false},
+      {"label": "d", "text": "CRI", "correct": false}
+    ],
+    "explanation": "SMI defined a common set of mesh CRDs. Its momentum has faded as Gateway API and mesh-specific APIs took over."
+  },
+  {
+    "id": "co-mesh-013",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which service-mesh feature deliberately introduces errors or latency to verify system resiliency?",
+    "options": [
+      {"label": "a", "text": "Fault injection", "correct": true},
+      {"label": "b", "text": "mTLS", "correct": false},
+      {"label": "c", "text": "Canary", "correct": false},
+      {"label": "d", "text": "Topology aware routing", "correct": false}
+    ],
+    "explanation": "Fault injection (delays, aborts) lets you chaos-test without modifying application code — a common mesh capability."
+  },
+  {
+    "id": "co-mesh-014",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which describes mTLS (mutual TLS) between workloads in a mesh?",
+    "options": [
+      {"label": "a", "text": "Both endpoints authenticate each other using certificates; traffic is encrypted in transit", "correct": true},
+      {"label": "b", "text": "Only the server authenticates the client with a password", "correct": false},
+      {"label": "c", "text": "Both endpoints use the same key as a shared secret", "correct": false},
+      {"label": "d", "text": "Transport is encrypted but no authentication occurs", "correct": false}
+    ],
+    "explanation": "mTLS requires both sides to present certificates, so both sides authenticate the other. Service meshes handle issuance and rotation automatically."
+  },
+  {
+    "id": "co-mesh-015",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which of the following is a legitimate downside of adding a service mesh?",
+    "options": [
+      {"label": "a", "text": "Added operational complexity and resource overhead from sidecars", "correct": true},
+      {"label": "b", "text": "It disables Services", "correct": false},
+      {"label": "c", "text": "It requires replacing the container runtime", "correct": false},
+      {"label": "d", "text": "It eliminates the need for Kubernetes", "correct": false}
+    ],
+    "explanation": "Meshes add proxies, CPU/memory overhead, and a new operational surface. Teams adopt one when the policy/security/observability wins outweigh that cost."
+  },
+  {
+    "id": "co-mesh-016",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "hard",
+    "question": "Which CNCF project is a multi-zone service mesh built on top of Envoy, with a focus on universal (VM + K8s) deployment?",
+    "options": [
+      {"label": "a", "text": "Kuma", "correct": true},
+      {"label": "b", "text": "Linkerd", "correct": false},
+      {"label": "c", "text": "Cilium", "correct": false},
+      {"label": "d", "text": "Harbor", "correct": false}
+    ],
+    "explanation": "Kuma (CNCF sandbox, originally from Kong) targets multi-zone mesh across Kubernetes and VMs using Envoy as its data plane."
+  },
+  {
+    "id": "co-mesh-017",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "A user runs `istioctl analyze` on their cluster. Which layer is this operating on?",
+    "options": [
+      {"label": "a", "text": "Control-plane configuration validation", "correct": true},
+      {"label": "b", "text": "Pod networking", "correct": false},
+      {"label": "c", "text": "etcd raft state", "correct": false},
+      {"label": "d", "text": "Node kernel", "correct": false}
+    ],
+    "explanation": "`istioctl analyze` inspects Istio custom resources and surrounding configuration for common mistakes — that is control-plane analysis, not data-plane packet inspection."
+  },
+  {
+    "id": "co-mesh-018",
+    "domain": "container-orchestration",
+    "subtopic": "service-mesh",
+    "difficulty": "medium",
+    "question": "Which statement about service meshes and NetworkPolicy is TRUE?",
+    "options": [
+      {"label": "a", "text": "They are complementary: NetworkPolicy handles L3/L4 pod-to-pod firewalling; the mesh handles L7 policy, mTLS, and traffic shaping", "correct": true},
+      {"label": "b", "text": "A mesh replaces NetworkPolicy", "correct": false},
+      {"label": "c", "text": "NetworkPolicy replaces the mesh", "correct": false},
+      {"label": "d", "text": "They cannot coexist", "correct": false}
+    ],
+    "explanation": "Defense in depth: NetworkPolicy filters at L3/L4 in the CNI; the mesh adds L7 authz, mTLS, and traffic features."
+  }
+]

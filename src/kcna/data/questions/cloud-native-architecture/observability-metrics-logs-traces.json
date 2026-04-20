@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cna-obs-001",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "easy",
+    "question": "Which are commonly known as the three pillars of observability?",
+    "options": [
+      {"label": "a", "text": "Metrics, logs, traces", "correct": true},
+      {"label": "b", "text": "CPU, memory, disk", "correct": false},
+      {"label": "c", "text": "Errors, latency, saturation", "correct": false},
+      {"label": "d", "text": "Pods, Nodes, Services", "correct": false}
+    ],
+    "explanation": "The three telemetry pillars are metrics (aggregated measurements), logs (discrete events), and traces (request paths)."
+  },
+  {
+    "id": "cna-obs-002",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "easy",
+    "question": "Which model does Prometheus primarily use to collect metrics?",
+    "options": [
+      {"label": "a", "text": "Agents push metrics to a central server", "correct": false},
+      {"label": "b", "text": "The server pulls (scrapes) metrics from HTTP endpoints", "correct": true},
+      {"label": "c", "text": "Metrics flow through a message queue", "correct": false},
+      {"label": "d", "text": "SNMP polling", "correct": false}
+    ],
+    "explanation": "Prometheus scrapes exporters/applications over HTTP at regular intervals. PushGateway exists for short-lived batch jobs that cannot be scraped."
+  },
+  {
+    "id": "cna-obs-003",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "easy",
+    "question": "According to Google's SRE book, what are the four golden signals?",
+    "options": [
+      {"label": "a", "text": "Latency, Traffic, Errors, Saturation", "correct": true},
+      {"label": "b", "text": "CPU, Memory, Disk, Network", "correct": false},
+      {"label": "c", "text": "Logs, Metrics, Traces, Events", "correct": false},
+      {"label": "d", "text": "Availability, Reliability, Scalability, Performance", "correct": false}
+    ],
+    "explanation": "The four golden signals are Latency, Traffic, Errors, and Saturation. They cover user-observable reliability succinctly."
+  },
+  {
+    "id": "cna-obs-004",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "What is the relationship between SLI, SLO, and SLA?",
+    "options": [
+      {"label": "a", "text": "SLI is a measured indicator; SLO is the internal target; SLA is the external contract with penalties", "correct": true},
+      {"label": "b", "text": "They are interchangeable", "correct": false},
+      {"label": "c", "text": "SLA is a metric, SLI is a target", "correct": false},
+      {"label": "d", "text": "SLO is the contract, SLI is the penalty", "correct": false}
+    ],
+    "explanation": "SLI measures. SLO targets. SLA contractually promises. An SLA is typically a customer-facing commitment weaker than the internal SLO."
+  },
+  {
+    "id": "cna-obs-005",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which CNCF-graduated project is the unified vendor-neutral standard for metrics, logs, and traces instrumentation?",
+    "options": [
+      {"label": "a", "text": "OpenTelemetry", "correct": true},
+      {"label": "b", "text": "Grafana", "correct": false},
+      {"label": "c", "text": "Fluentd", "correct": false},
+      {"label": "d", "text": "Prometheus", "correct": false}
+    ],
+    "explanation": "OpenTelemetry is the merger of OpenTracing and OpenCensus. It provides SDKs, APIs, and a Collector for all three telemetry signals."
+  },
+  {
+    "id": "cna-obs-006",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which CNCF-graduated project is a commonly-used distributed tracing backend?",
+    "options": [
+      {"label": "a", "text": "Jaeger", "correct": true},
+      {"label": "b", "text": "Fluent Bit", "correct": false},
+      {"label": "c", "text": "Harbor", "correct": false},
+      {"label": "d", "text": "OpenCost", "correct": false}
+    ],
+    "explanation": "Jaeger is a graduated CNCF tracing system. Tempo, Zipkin, and OpenTelemetry Collector backends are alternatives."
+  },
+  {
+    "id": "cna-obs-007",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which CNCF project is a lightweight log and metrics forwarder often deployed as a DaemonSet?",
+    "options": [
+      {"label": "a", "text": "Fluent Bit", "correct": true},
+      {"label": "b", "text": "Jaeger", "correct": false},
+      {"label": "c", "text": "Prometheus", "correct": false},
+      {"label": "d", "text": "Flux", "correct": false}
+    ],
+    "explanation": "Fluent Bit is a high-performance C-based log/metric forwarder. Fluentd is its Ruby sibling with a broader plugin ecosystem."
+  },
+  {
+    "id": "cna-obs-008",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which statement about Prometheus storage is TRUE?",
+    "options": [
+      {"label": "a", "text": "Prometheus stores a local time-series database on disk; long-term storage is delegated to Thanos, Cortex, Mimir, etc.", "correct": true},
+      {"label": "b", "text": "Prometheus writes directly to etcd", "correct": false},
+      {"label": "c", "text": "Prometheus stores only logs", "correct": false},
+      {"label": "d", "text": "Prometheus requires an external database to function", "correct": false}
+    ],
+    "explanation": "Prometheus keeps a local TSDB with limited retention. Horizontal scaling, longer retention, and multi-cluster aggregation use Thanos/Cortex/Mimir."
+  },
+  {
+    "id": "cna-obs-009",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which project is most commonly used to visualize Prometheus metrics via dashboards?",
+    "options": [
+      {"label": "a", "text": "Grafana", "correct": true},
+      {"label": "b", "text": "Harbor", "correct": false},
+      {"label": "c", "text": "Kibana", "correct": false},
+      {"label": "d", "text": "Argo CD", "correct": false}
+    ],
+    "explanation": "Grafana is the de facto open-source dashboarding frontend for Prometheus and many other data sources."
+  },
+  {
+    "id": "cna-obs-010",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which Prometheus component is responsible for firing notifications based on alerting rules?",
+    "options": [
+      {"label": "a", "text": "Alertmanager", "correct": true},
+      {"label": "b", "text": "PushGateway", "correct": false},
+      {"label": "c", "text": "Grafana", "correct": false},
+      {"label": "d", "text": "Jaeger", "correct": false}
+    ],
+    "explanation": "Prometheus server evaluates alerting rules and fires alerts to Alertmanager, which deduplicates, groups, and routes notifications (PagerDuty, Slack, email, etc.)."
+  },
+  {
+    "id": "cna-obs-011",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "A backend team records every incoming request with a traceId and spanId so they can follow a request across microservices. Which observability signal is this?",
+    "options": [
+      {"label": "a", "text": "Distributed tracing", "correct": true},
+      {"label": "b", "text": "Metrics", "correct": false},
+      {"label": "c", "text": "Logs", "correct": false},
+      {"label": "d", "text": "Events", "correct": false}
+    ],
+    "explanation": "Trace + span IDs propagated across services form a trace. Tracing tools reconstruct the end-to-end call graph for each request."
+  },
+  {
+    "id": "cna-obs-012",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which Grafana project is a horizontally-scalable, multi-tenant log aggregation system inspired by Prometheus?",
+    "options": [
+      {"label": "a", "text": "Loki", "correct": true},
+      {"label": "b", "text": "Tempo", "correct": false},
+      {"label": "c", "text": "Mimir", "correct": false},
+      {"label": "d", "text": "Cortex", "correct": false}
+    ],
+    "explanation": "Loki indexes log labels (not full text), keeping it cheap to operate at scale. Tempo is the sibling tracing backend; Mimir is the metrics backend."
+  },
+  {
+    "id": "cna-obs-013",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which of these is NOT one of the four golden signals?",
+    "options": [
+      {"label": "a", "text": "Latency", "correct": false},
+      {"label": "b", "text": "Traffic", "correct": false},
+      {"label": "c", "text": "Availability", "correct": true},
+      {"label": "d", "text": "Saturation", "correct": false}
+    ],
+    "explanation": "Availability is a common SLO category but not one of Google's four golden signals (Latency, Traffic, Errors, Saturation)."
+  },
+  {
+    "id": "cna-obs-014",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which type of Prometheus metric counts events and only ever increases or resets to zero?",
+    "options": [
+      {"label": "a", "text": "Counter", "correct": true},
+      {"label": "b", "text": "Gauge", "correct": false},
+      {"label": "c", "text": "Histogram", "correct": false},
+      {"label": "d", "text": "Summary", "correct": false}
+    ],
+    "explanation": "Counters are monotonically increasing (with a reset to zero allowed). Use rate() or increase() over them in queries."
+  },
+  {
+    "id": "cna-obs-015",
+    "domain": "cloud-native-architecture",
+    "subtopic": "observability-metrics-logs-traces",
+    "difficulty": "medium",
+    "question": "Which Prometheus metric type is appropriate for a value that can go up and down (e.g., in-flight requests)?",
+    "options": [
+      {"label": "a", "text": "Counter", "correct": false},
+      {"label": "b", "text": "Gauge", "correct": true},
+      {"label": "c", "text": "Histogram", "correct": false},
+      {"label": "d", "text": "Summary", "correct": false}
+    ],
+    "explanation": "A Gauge represents a point-in-time value that can fluctuate."
+  }
+]

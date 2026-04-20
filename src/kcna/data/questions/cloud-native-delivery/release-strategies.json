@@ -1,0 +1,226 @@
+[
+  {
+    "id": "cnd-rel-001",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "easy",
+    "question": "Which deployment strategy gradually replaces old Pods with new ones while keeping the Service available?",
+    "options": [
+      {"label": "a", "text": "Rolling update", "correct": true},
+      {"label": "b", "text": "Blue/green", "correct": false},
+      {"label": "c", "text": "Recreate", "correct": false},
+      {"label": "d", "text": "Shadow", "correct": false}
+    ],
+    "explanation": "Rolling update is the default Deployment strategy: add some new Pods, remove some old Pods, bounded by maxSurge and maxUnavailable."
+  },
+  {
+    "id": "cnd-rel-002",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "easy",
+    "question": "Which strategy kills all old Pods before starting new ones, incurring downtime?",
+    "options": [
+      {"label": "a", "text": "Rolling update", "correct": false},
+      {"label": "b", "text": "Recreate", "correct": true},
+      {"label": "c", "text": "Canary", "correct": false},
+      {"label": "d", "text": "Blue/green", "correct": false}
+    ],
+    "explanation": "The Recreate strategy stops all old replicas before starting new ones. It is simplest but causes a short outage."
+  },
+  {
+    "id": "cnd-rel-003",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which release strategy keeps two full environments (old=blue, new=green) and atomically switches traffic from one to the other?",
+    "options": [
+      {"label": "a", "text": "Blue/green", "correct": true},
+      {"label": "b", "text": "Rolling update", "correct": false},
+      {"label": "c", "text": "Shadow", "correct": false},
+      {"label": "d", "text": "Canary", "correct": false}
+    ],
+    "explanation": "Blue/green keeps two parallel environments. You validate green in isolation, then flip traffic. Rollback is a single switch back."
+  },
+  {
+    "id": "cnd-rel-004",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which strategy shifts a small percentage of traffic to a new version first, then gradually increases it if metrics are healthy?",
+    "options": [
+      {"label": "a", "text": "Canary", "correct": true},
+      {"label": "b", "text": "Blue/green", "correct": false},
+      {"label": "c", "text": "Recreate", "correct": false},
+      {"label": "d", "text": "A/B", "correct": false}
+    ],
+    "explanation": "Canary deployments validate a new version on a slice of production traffic before full rollout."
+  },
+  {
+    "id": "cnd-rel-005",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which strategy routes users to different versions based on user attributes (cookies, headers, IDs) to compare experiences?",
+    "options": [
+      {"label": "a", "text": "A/B testing", "correct": true},
+      {"label": "b", "text": "Canary", "correct": false},
+      {"label": "c", "text": "Blue/green", "correct": false},
+      {"label": "d", "text": "Recreate", "correct": false}
+    ],
+    "explanation": "A/B testing is about comparing variants, not just rolling out. Routing is typically by header/cookie or a feature-flag service."
+  },
+  {
+    "id": "cnd-rel-006",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "hard",
+    "question": "Which strategy duplicates production traffic to a new version to observe behavior without serving any response to users?",
+    "options": [
+      {"label": "a", "text": "Shadow (mirroring)", "correct": true},
+      {"label": "b", "text": "Canary", "correct": false},
+      {"label": "c", "text": "Blue/green", "correct": false},
+      {"label": "d", "text": "Recreate", "correct": false}
+    ],
+    "explanation": "Shadow deployments mirror real traffic to v2 for testing. The response from v2 is discarded; only the live path (v1) returns to the user."
+  },
+  {
+    "id": "cnd-rel-007",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which two Deployment spec fields control how aggressively a rolling update proceeds?",
+    "options": [
+      {"label": "a", "text": "maxSurge and maxUnavailable", "correct": true},
+      {"label": "b", "text": "minReadySeconds and revisionHistoryLimit", "correct": false},
+      {"label": "c", "text": "progressDeadlineSeconds and paused", "correct": false},
+      {"label": "d", "text": "strategy and selector", "correct": false}
+    ],
+    "explanation": "maxSurge caps how many extra Pods can be created during the update; maxUnavailable caps how many existing Pods can be down."
+  },
+  {
+    "id": "cnd-rel-008",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which deployment strategy is most appropriate when you need an instant rollback path without re-scheduling Pods?",
+    "options": [
+      {"label": "a", "text": "Blue/green", "correct": true},
+      {"label": "b", "text": "Rolling update", "correct": false},
+      {"label": "c", "text": "Recreate", "correct": false},
+      {"label": "d", "text": "A/B", "correct": false}
+    ],
+    "explanation": "Blue/green keeps the old environment alive. Rolling back is simply flipping the Service/LB back to blue."
+  },
+  {
+    "id": "cnd-rel-009",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which statement about Deployment `revisionHistoryLimit` is TRUE?",
+    "options": [
+      {"label": "a", "text": "It controls how many old ReplicaSets are retained so you can roll back", "correct": true},
+      {"label": "b", "text": "It limits the number of Pods per ReplicaSet", "correct": false},
+      {"label": "c", "text": "It sets the Service revision", "correct": false},
+      {"label": "d", "text": "It is required", "correct": false}
+    ],
+    "explanation": "revisionHistoryLimit bounds the number of prior ReplicaSets retained. Older ones are garbage-collected."
+  },
+  {
+    "id": "cnd-rel-010",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "easy",
+    "question": "Which command rolls a Deployment back to the previous revision?",
+    "options": [
+      {"label": "a", "text": "kubectl rollout undo deployment/<name>", "correct": true},
+      {"label": "b", "text": "kubectl delete deployment/<name>", "correct": false},
+      {"label": "c", "text": "kubectl edit service/<name>", "correct": false},
+      {"label": "d", "text": "kubectl restart pod/<name>", "correct": false}
+    ],
+    "explanation": "`kubectl rollout undo` reverts the Deployment to its previous revision. Pair with `rollout history` to inspect changes."
+  },
+  {
+    "id": "cnd-rel-011",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which Argo Rollouts feature automatically promotes or aborts a canary based on metric queries?",
+    "options": [
+      {"label": "a", "text": "AnalysisTemplates / AnalysisRuns", "correct": true},
+      {"label": "b", "text": "PodDisruptionBudgets", "correct": false},
+      {"label": "c", "text": "ResourceQuota", "correct": false},
+      {"label": "d", "text": "NodeAffinity", "correct": false}
+    ],
+    "explanation": "Argo Rollouts' AnalysisTemplates evaluate metric providers (Prometheus, Datadog, Wavefront, etc.) and drive automatic promotion decisions."
+  },
+  {
+    "id": "cnd-rel-012",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which of the following is the MAIN reason canary rollouts are safer than full deployments?",
+    "options": [
+      {"label": "a", "text": "A bad change impacts only a small subset of users before detection", "correct": true},
+      {"label": "b", "text": "Canary deployments skip CI", "correct": false},
+      {"label": "c", "text": "Canary deployments are faster to write", "correct": false},
+      {"label": "d", "text": "Canary eliminates the need for observability", "correct": false}
+    ],
+    "explanation": "Canary deliberately limits blast radius, giving operators time to detect regressions on real traffic."
+  },
+  {
+    "id": "cnd-rel-013",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "hard",
+    "question": "Progressive delivery most often depends on which Kubernetes capability for fine-grained traffic shifting?",
+    "options": [
+      {"label": "a", "text": "A service mesh or advanced Ingress/Gateway that supports weighted routing", "correct": true},
+      {"label": "b", "text": "ConfigMap reloads", "correct": false},
+      {"label": "c", "text": "Node taints", "correct": false},
+      {"label": "d", "text": "CSI snapshots", "correct": false}
+    ],
+    "explanation": "Plain Kubernetes Services split by replica count, which is coarse. Meshes and modern Ingress/Gateway can split by weight or headers, which is precise."
+  },
+  {
+    "id": "cnd-rel-014",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a typical stopping/rollback signal in automated canary analysis?",
+    "options": [
+      {"label": "a", "text": "Error rate rises above a threshold", "correct": false},
+      {"label": "b", "text": "p99 latency regresses", "correct": false},
+      {"label": "c", "text": "Saturation climbs sharply", "correct": false},
+      {"label": "d", "text": "The image tag uses a human-readable name", "correct": true}
+    ],
+    "explanation": "Canary analysis looks at operational signals (errors, latency, saturation). Image tag names are irrelevant to automated health evaluation."
+  },
+  {
+    "id": "cnd-rel-015",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "medium",
+    "question": "Which of the following best describes a feature flag?",
+    "options": [
+      {"label": "a", "text": "A runtime toggle that turns a code path on or off independent of deployment", "correct": true},
+      {"label": "b", "text": "A Kubernetes annotation", "correct": false},
+      {"label": "c", "text": "A container image label", "correct": false},
+      {"label": "d", "text": "A type of Service", "correct": false}
+    ],
+    "explanation": "Feature flags decouple release from deploy: new code can ship dark, then be enabled progressively without redeploying."
+  },
+  {
+    "id": "cnd-rel-016",
+    "domain": "cloud-native-delivery",
+    "subtopic": "release-strategies",
+    "difficulty": "easy",
+    "question": "Which of the following is a valid spec.strategy.type value on a Kubernetes Deployment?",
+    "options": [
+      {"label": "a", "text": "RollingUpdate", "correct": true},
+      {"label": "b", "text": "BlueGreen", "correct": false},
+      {"label": "c", "text": "Canary", "correct": false},
+      {"label": "d", "text": "Shadow", "correct": false}
+    ],
+    "explanation": "Kubernetes Deployment supports only RollingUpdate and Recreate natively. Blue/green, canary, and shadow are implemented by higher-level tooling (Argo Rollouts, service meshes)."
+  }
+]

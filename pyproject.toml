@@ -1,0 +1,35 @@
+[project]
+name = "kcna"
+version = "0.1.0"
+description = "KCNA practice exam CLI simulator"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Gabriel Isuekebho" }]
+dependencies = [
+    "typer>=0.12",
+    "textual>=0.80",
+    "rich>=13.7",
+    "pydantic>=2.7",
+    "platformdirs>=4.2",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8", "pytest-asyncio>=0.23", "textual-dev"]
+
+[project.scripts]
+kcna = "kcna.cli:app"
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+kcna = ["tui/*.tcss", "data/questions/**/*.json"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

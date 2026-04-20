@@ -1,0 +1,282 @@
+[
+  {
+    "id": "kf-net-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT a valid Kubernetes Service type?",
+    "options": [
+      {"label": "a", "text": "ClusterIP", "correct": false},
+      {"label": "b", "text": "NodePort", "correct": false},
+      {"label": "c", "text": "Ingress", "correct": true},
+      {"label": "d", "text": "LoadBalancer", "correct": false}
+    ],
+    "explanation": "Ingress is a separate API resource, not a Service type. Valid Service types are ClusterIP, NodePort, LoadBalancer, and ExternalName."
+  },
+  {
+    "id": "kf-net-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "Which Service type exposes a Service on an internal, cluster-only virtual IP?",
+    "options": [
+      {"label": "a", "text": "ClusterIP", "correct": true},
+      {"label": "b", "text": "NodePort", "correct": false},
+      {"label": "c", "text": "LoadBalancer", "correct": false},
+      {"label": "d", "text": "ExternalName", "correct": false}
+    ],
+    "explanation": "ClusterIP is the default Service type and gives a stable virtual IP usable only from inside the cluster."
+  },
+  {
+    "id": "kf-net-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "Which Service type maps the Service to a port opened on every Node's IP so external clients can reach it on <NodeIP>:<port>?",
+    "options": [
+      {"label": "a", "text": "ClusterIP", "correct": false},
+      {"label": "b", "text": "NodePort", "correct": true},
+      {"label": "c", "text": "LoadBalancer", "correct": false},
+      {"label": "d", "text": "Headless", "correct": false}
+    ],
+    "explanation": "NodePort opens a static port on every Node and forwards to the Service's ClusterIP behind the scenes."
+  },
+  {
+    "id": "kf-net-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "Which Service type instructs the cloud provider to provision an external load balancer and point it at Service endpoints?",
+    "options": [
+      {"label": "a", "text": "ClusterIP", "correct": false},
+      {"label": "b", "text": "NodePort", "correct": false},
+      {"label": "c", "text": "LoadBalancer", "correct": true},
+      {"label": "d", "text": "ExternalName", "correct": false}
+    ],
+    "explanation": "LoadBalancer triggers the cloud controller manager to allocate an external LB (e.g., ELB/NLB/GCLB) that routes to the Service."
+  },
+  {
+    "id": "kf-net-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which Service type returns a CNAME DNS record rather than proxying traffic itself?",
+    "options": [
+      {"label": "a", "text": "ClusterIP", "correct": false},
+      {"label": "b", "text": "NodePort", "correct": false},
+      {"label": "c", "text": "LoadBalancer", "correct": false},
+      {"label": "d", "text": "ExternalName", "correct": true}
+    ],
+    "explanation": "ExternalName maps a Service name to an external DNS CNAME. No proxying, no endpoints, no virtual IP."
+  },
+  {
+    "id": "kf-net-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "What is a headless Service?",
+    "options": [
+      {"label": "a", "text": "A Service with `clusterIP: None`, used so DNS returns Pod IPs directly", "correct": true},
+      {"label": "b", "text": "A Service without a selector", "correct": false},
+      {"label": "c", "text": "A Service that disables health checks", "correct": false},
+      {"label": "d", "text": "A Service with no Pod backends", "correct": false}
+    ],
+    "explanation": "Setting clusterIP to None turns off the virtual IP so DNS queries return the Pod IPs directly. Commonly used with StatefulSets."
+  },
+  {
+    "id": "kf-net-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which Kubernetes resource is designed to expose multiple HTTP services under a single external IP, routing by host and path?",
+    "options": [
+      {"label": "a", "text": "Service", "correct": false},
+      {"label": "b", "text": "Ingress", "correct": true},
+      {"label": "c", "text": "Endpoints", "correct": false},
+      {"label": "d", "text": "NetworkPolicy", "correct": false}
+    ],
+    "explanation": "Ingress is an L7 HTTP(S) routing abstraction. Rules are implemented by an Ingress controller such as NGINX, Traefik, or a cloud LB-based controller."
+  },
+  {
+    "id": "kf-net-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which statement about Ingress is TRUE?",
+    "options": [
+      {"label": "a", "text": "Ingress works without an Ingress controller", "correct": false},
+      {"label": "b", "text": "Ingress is only a specification; an Ingress controller must be running to implement the rules", "correct": true},
+      {"label": "c", "text": "Ingress is a Service type", "correct": false},
+      {"label": "d", "text": "Ingress supports only raw TCP", "correct": false}
+    ],
+    "explanation": "Creating an Ingress object has no effect until a controller (NGINX, Traefik, HAProxy, ALB, etc.) is running to watch and implement it."
+  },
+  {
+    "id": "kf-net-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "hard",
+    "question": "Which resource group is the modern successor to Ingress, offering richer L4/L7 routing with role-split between infrastructure operators and application developers?",
+    "options": [
+      {"label": "a", "text": "Gateway API", "correct": true},
+      {"label": "b", "text": "Service Mesh Interface", "correct": false},
+      {"label": "c", "text": "IngressClass v2", "correct": false},
+      {"label": "d", "text": "CNI Chaining", "correct": false}
+    ],
+    "explanation": "Gateway API (GatewayClass, Gateway, HTTPRoute, TLSRoute, etc.) is the graduated successor to Ingress. It cleanly separates GatewayClass/Gateway (ops) from Routes (app teams)."
+  },
+  {
+    "id": "kf-net-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Inside the cluster, DNS resolves `my-svc.my-namespace.svc.cluster.local` to what, by default?",
+    "options": [
+      {"label": "a", "text": "The Pod IPs directly", "correct": false},
+      {"label": "b", "text": "The Service's ClusterIP", "correct": true},
+      {"label": "c", "text": "The NodeIP:NodePort", "correct": false},
+      {"label": "d", "text": "Nothing; DNS is disabled", "correct": false}
+    ],
+    "explanation": "By default CoreDNS returns the Service ClusterIP. Headless Services instead return Pod IPs."
+  },
+  {
+    "id": "kf-net-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which Kubernetes resource represents the actual IP:port backends of a Service and is kept in sync with Ready Pods?",
+    "options": [
+      {"label": "a", "text": "EndpointSlice", "correct": true},
+      {"label": "b", "text": "Ingress", "correct": false},
+      {"label": "c", "text": "NetworkPolicy", "correct": false},
+      {"label": "d", "text": "Pod", "correct": false}
+    ],
+    "explanation": "EndpointSlice (and its predecessor Endpoints) is what kube-proxy reads to program routing rules. Endpoints are only added when Pods are Ready."
+  },
+  {
+    "id": "kf-net-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "Which resource is used to restrict Pod-to-Pod traffic at layer 3/4 (IPs and ports) inside a cluster?",
+    "options": [
+      {"label": "a", "text": "Service", "correct": false},
+      {"label": "b", "text": "NetworkPolicy", "correct": true},
+      {"label": "c", "text": "Ingress", "correct": false},
+      {"label": "d", "text": "EndpointSlice", "correct": false}
+    ],
+    "explanation": "NetworkPolicy is the Kubernetes-native way to whitelist ingress/egress between Pods and to/from named namespaces."
+  },
+  {
+    "id": "kf-net-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Before any NetworkPolicy is created in a namespace, what is the default traffic behavior?",
+    "options": [
+      {"label": "a", "text": "All Pod traffic is denied", "correct": false},
+      {"label": "b", "text": "All Pod traffic is allowed", "correct": true},
+      {"label": "c", "text": "Only same-namespace traffic is allowed", "correct": false},
+      {"label": "d", "text": "Only cluster-local traffic is allowed", "correct": false}
+    ],
+    "explanation": "Kubernetes defaults to an allow-all network. NetworkPolicies switch on allow-listing for the Pods they select."
+  },
+  {
+    "id": "kf-net-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "hard",
+    "question": "NetworkPolicy enforcement is implemented by which component in the cluster?",
+    "options": [
+      {"label": "a", "text": "kube-apiserver", "correct": false},
+      {"label": "b", "text": "kube-proxy", "correct": false},
+      {"label": "c", "text": "The CNI plugin (e.g., Calico, Cilium)", "correct": true},
+      {"label": "d", "text": "CoreDNS", "correct": false}
+    ],
+    "explanation": "NetworkPolicy is a declarative API, but actual enforcement requires a CNI plugin that implements it. Flannel alone does not."
+  },
+  {
+    "id": "kf-net-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which claim about Pod IPs is TRUE in a standard Kubernetes cluster?",
+    "options": [
+      {"label": "a", "text": "Pods on different Nodes cannot reach each other directly", "correct": false},
+      {"label": "b", "text": "Each Pod gets its own IP and can reach every other Pod without NAT", "correct": true},
+      {"label": "c", "text": "Pods share IPs with the Node they run on", "correct": false},
+      {"label": "d", "text": "Pod IPs are static forever", "correct": false}
+    ],
+    "explanation": "The Kubernetes networking model requires flat, NAT-free Pod-to-Pod connectivity. Pod IPs are ephemeral — they change when the Pod is rescheduled."
+  },
+  {
+    "id": "kf-net-016",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "A Service selects Pods through which Kubernetes mechanism?",
+    "options": [
+      {"label": "a", "text": "Pod name prefix", "correct": false},
+      {"label": "b", "text": "Labels and selectors", "correct": true},
+      {"label": "c", "text": "UID matching", "correct": false},
+      {"label": "d", "text": "Container image digest", "correct": false}
+    ],
+    "explanation": "A Service's selector matches Pods by labels, and the EndpointSlice controller keeps the backends in sync as Pods come and go."
+  },
+  {
+    "id": "kf-net-017",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which port field on a Service defines the internal port that workloads use when connecting to the Service ClusterIP?",
+    "options": [
+      {"label": "a", "text": "targetPort", "correct": false},
+      {"label": "b", "text": "nodePort", "correct": false},
+      {"label": "c", "text": "port", "correct": true},
+      {"label": "d", "text": "externalPort", "correct": false}
+    ],
+    "explanation": "`port` is the Service's own port; `targetPort` is the port on the backing Pods; `nodePort` is only used for NodePort/LoadBalancer types."
+  },
+  {
+    "id": "kf-net-018",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "hard",
+    "question": "Why is kube-proxy unnecessary on clusters running Cilium in eBPF mode?",
+    "options": [
+      {"label": "a", "text": "Cilium disables Services", "correct": false},
+      {"label": "b", "text": "Cilium replaces kube-proxy by implementing Service load balancing directly in eBPF", "correct": true},
+      {"label": "c", "text": "Cilium runs kube-proxy inside a sidecar", "correct": false},
+      {"label": "d", "text": "Cilium uses iptables for load balancing", "correct": false}
+    ],
+    "explanation": "Cilium can replace kube-proxy by programming Service load-balancing rules directly into the kernel via eBPF, avoiding iptables/ipvs overhead."
+  },
+  {
+    "id": "kf-net-019",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "easy",
+    "question": "A Pod wants to reach `api.other-ns.svc.cluster.local`. Which component answers this DNS query?",
+    "options": [
+      {"label": "a", "text": "kube-proxy", "correct": false},
+      {"label": "b", "text": "CoreDNS", "correct": true},
+      {"label": "c", "text": "kubelet", "correct": false},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "CoreDNS is the in-cluster DNS resolver. kube-proxy never handles DNS — it rewrites packets to Pod IPs."
+  },
+  {
+    "id": "kf-net-020",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "networking-services",
+    "difficulty": "medium",
+    "question": "Which statement about `kubectl port-forward` is TRUE?",
+    "options": [
+      {"label": "a", "text": "It sets up a NodePort automatically", "correct": false},
+      {"label": "b", "text": "It tunnels a local port through the API server to a Pod or Service for temporary access", "correct": true},
+      {"label": "c", "text": "It creates a persistent Ingress rule", "correct": false},
+      {"label": "d", "text": "It only works for StatefulSets", "correct": false}
+    ],
+    "explanation": "`kubectl port-forward` opens a local TCP tunnel through the API server's SPDY channel for one-off access; it is not a production exposure mechanism."
+  }
+]

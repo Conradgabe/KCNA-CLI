@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cna-cncf-001",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "easy",
+    "question": "Which is the highest maturity level a CNCF project can reach?",
+    "options": [
+      {"label": "a", "text": "Sandbox", "correct": false},
+      {"label": "b", "text": "Incubating", "correct": false},
+      {"label": "c", "text": "Graduated", "correct": true},
+      {"label": "d", "text": "Archived", "correct": false}
+    ],
+    "explanation": "The CNCF maturity ladder is Sandbox → Incubating → Graduated. Archived indicates the project is no longer active."
+  },
+  {
+    "id": "cna-cncf-002",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "easy",
+    "question": "Which organization maintains the CNCF and the overall cloud-native landscape?",
+    "options": [
+      {"label": "a", "text": "The Linux Foundation", "correct": true},
+      {"label": "b", "text": "The IETF", "correct": false},
+      {"label": "c", "text": "The Apache Software Foundation", "correct": false},
+      {"label": "d", "text": "W3C", "correct": false}
+    ],
+    "explanation": "The Cloud Native Computing Foundation is part of the Linux Foundation."
+  },
+  {
+    "id": "cna-cncf-003",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "medium",
+    "question": "Which CNCF body reviews project graduation, due diligence, and technical direction?",
+    "options": [
+      {"label": "a", "text": "Technical Oversight Committee (TOC)", "correct": true},
+      {"label": "b", "text": "Governing Board", "correct": false},
+      {"label": "c", "text": "End User Technical Advisory Board", "correct": false},
+      {"label": "d", "text": "Marketing Committee", "correct": false}
+    ],
+    "explanation": "The TOC runs technical governance including maturity-level reviews and TAG oversight. The Governing Board handles business and sponsorships."
+  },
+  {
+    "id": "cna-cncf-004",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "medium",
+    "question": "What are CNCF TAGs?",
+    "options": [
+      {"label": "a", "text": "Technical Advisory Groups that steward particular topic areas (e.g., Security, Observability, App Delivery)", "correct": true},
+      {"label": "b", "text": "Generic commit tags", "correct": false},
+      {"label": "c", "text": "Product tier labels", "correct": false},
+      {"label": "d", "text": "Sandbox entry requirements", "correct": false}
+    ],
+    "explanation": "TAGs are community groups that advise the TOC in focused domains. Examples: TAG-Security, TAG-Observability, TAG-App-Delivery, TAG-Network."
+  },
+  {
+    "id": "cna-cncf-005",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT a common CNCF project category on the Landscape?",
+    "options": [
+      {"label": "a", "text": "Orchestration & Management", "correct": false},
+      {"label": "b", "text": "Observability & Analysis", "correct": false},
+      {"label": "c", "text": "Desktop Word Processing", "correct": true},
+      {"label": "d", "text": "Runtime", "correct": false}
+    ],
+    "explanation": "The CNCF Landscape groups tooling by layer and category (runtime, orchestration, observability, app definition, platform, etc.)."
+  },
+  {
+    "id": "cna-cncf-006",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "medium",
+    "question": "Which event is the CNCF's flagship global conference?",
+    "options": [
+      {"label": "a", "text": "KubeCon + CloudNativeCon", "correct": true},
+      {"label": "b", "text": "Re:Invent", "correct": false},
+      {"label": "c", "text": "DockerCon", "correct": false},
+      {"label": "d", "text": "OSCON", "correct": false}
+    ],
+    "explanation": "KubeCon + CloudNativeCon runs multiple times per year in different regions (NA, EU, China, Japan, India)."
+  },
+  {
+    "id": "cna-cncf-007",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "medium",
+    "question": "Which CNCF definition best describes cloud-native technologies?",
+    "options": [
+      {"label": "a", "text": "They empower organizations to build and run scalable applications in modern, dynamic environments — using containers, service meshes, microservices, immutable infrastructure, and declarative APIs", "correct": true},
+      {"label": "b", "text": "They are restricted to public cloud providers only", "correct": false},
+      {"label": "c", "text": "They require serverless for all workloads", "correct": false},
+      {"label": "d", "text": "They are only for greenfield applications", "correct": false}
+    ],
+    "explanation": "This is the CNCF's own definition. Cloud-native is about patterns and practices — not a specific cloud vendor or product."
+  },
+  {
+    "id": "cna-cncf-008",
+    "domain": "cloud-native-architecture",
+    "subtopic": "cncf-landscape-governance",
+    "difficulty": "medium",
+    "question": "Which of the following is a CNCF-defined persona in platform and application delivery discussions?",
+    "options": [
+      {"label": "a", "text": "Platform Engineer", "correct": true},
+      {"label": "b", "text": "Pod", "correct": false},
+      {"label": "c", "text": "CNI plugin", "correct": false},
+      {"label": "d", "text": "etcd operator", "correct": false}
+    ],
+    "explanation": "CNCF guidance distinguishes personas (Platform Engineer, Application Developer, SRE, Security Engineer) to clarify responsibilities."
+  }
+]

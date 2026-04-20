@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cna-std-001",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "easy",
+    "question": "Which open standard describes how container images are structured?",
+    "options": [
+      {"label": "a", "text": "OCI Image Specification", "correct": true},
+      {"label": "b", "text": "CNI", "correct": false},
+      {"label": "c", "text": "CSI", "correct": false},
+      {"label": "d", "text": "CRI", "correct": false}
+    ],
+    "explanation": "The Open Container Initiative publishes Image, Runtime, and Distribution specifications. OCI Image defines the on-disk structure."
+  },
+  {
+    "id": "cna-std-002",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "easy",
+    "question": "Which open interface lets kubelet use pluggable container runtimes?",
+    "options": [
+      {"label": "a", "text": "CRI", "correct": true},
+      {"label": "b", "text": "CNI", "correct": false},
+      {"label": "c", "text": "CSI", "correct": false},
+      {"label": "d", "text": "SMI", "correct": false}
+    ],
+    "explanation": "The Container Runtime Interface is the gRPC contract between kubelet and runtimes like containerd and CRI-O."
+  },
+  {
+    "id": "cna-std-003",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "easy",
+    "question": "Which open interface enables pluggable Pod networking?",
+    "options": [
+      {"label": "a", "text": "CNI", "correct": true},
+      {"label": "b", "text": "CRI", "correct": false},
+      {"label": "c", "text": "CSI", "correct": false},
+      {"label": "d", "text": "OCI", "correct": false}
+    ],
+    "explanation": "CNI (Container Networking Interface) specifies a minimal plugin contract used by Kubernetes and other orchestrators."
+  },
+  {
+    "id": "cna-std-004",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "easy",
+    "question": "Which open interface enables pluggable storage drivers in Kubernetes?",
+    "options": [
+      {"label": "a", "text": "CSI", "correct": true},
+      {"label": "b", "text": "OCI", "correct": false},
+      {"label": "c", "text": "CNI", "correct": false},
+      {"label": "d", "text": "SMI", "correct": false}
+    ],
+    "explanation": "CSI lets storage vendors ship out-of-tree drivers compatible with Kubernetes and other orchestrators."
+  },
+  {
+    "id": "cna-std-005",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "medium",
+    "question": "Which open spec defines a standard event envelope for cloud-native events?",
+    "options": [
+      {"label": "a", "text": "CloudEvents", "correct": true},
+      {"label": "b", "text": "OpenMetrics", "correct": false},
+      {"label": "c", "text": "OpenTracing", "correct": false},
+      {"label": "d", "text": "OCI Distribution", "correct": false}
+    ],
+    "explanation": "CloudEvents standardizes event fields (source, type, id, data) so producers and consumers interoperate across platforms."
+  },
+  {
+    "id": "cna-std-006",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "medium",
+    "question": "Which standard evolved from Prometheus exposition format to define how metrics are represented and transmitted?",
+    "options": [
+      {"label": "a", "text": "OpenMetrics", "correct": true},
+      {"label": "b", "text": "OpenTelemetry", "correct": false},
+      {"label": "c", "text": "OCI Metrics", "correct": false},
+      {"label": "d", "text": "gRPC Metrics Format", "correct": false}
+    ],
+    "explanation": "OpenMetrics generalizes the Prometheus text/Protobuf format into an open standard, now broadly adopted across instrumentation libraries."
+  },
+  {
+    "id": "cna-std-007",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "medium",
+    "question": "Which standard provides cryptographic workload identity via short-lived certificates, regardless of platform?",
+    "options": [
+      {"label": "a", "text": "SPIFFE", "correct": true},
+      {"label": "b", "text": "OAuth2", "correct": false},
+      {"label": "c", "text": "OIDC", "correct": false},
+      {"label": "d", "text": "ACME", "correct": false}
+    ],
+    "explanation": "SPIFFE defines SVIDs (SPIFFE Verifiable Identity Documents) as X.509 or JWT artifacts. SPIRE is the reference implementation."
+  },
+  {
+    "id": "cna-std-008",
+    "domain": "cloud-native-architecture",
+    "subtopic": "open-standards",
+    "difficulty": "medium",
+    "question": "Which open standard family covers cross-vendor traffic routing primitives as Kubernetes CRDs (Gateway, HTTPRoute, etc.)?",
+    "options": [
+      {"label": "a", "text": "Gateway API", "correct": true},
+      {"label": "b", "text": "OCI Distribution", "correct": false},
+      {"label": "c", "text": "CRI", "correct": false},
+      {"label": "d", "text": "CNI", "correct": false}
+    ],
+    "explanation": "Gateway API is a SIG-Network API, graduated for broad use across Ingress controllers, service meshes, and cloud load balancers."
+  }
+]

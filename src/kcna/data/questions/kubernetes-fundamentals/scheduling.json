@@ -1,0 +1,212 @@
+[
+  {
+    "id": "kf-sched-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "easy",
+    "question": "What is the primary job of kube-scheduler?",
+    "options": [
+      {"label": "a", "text": "To build container images", "correct": false},
+      {"label": "b", "text": "To pick the best Node for each unscheduled Pod", "correct": true},
+      {"label": "c", "text": "To restart failed Pods", "correct": false},
+      {"label": "d", "text": "To expose Services", "correct": false}
+    ],
+    "explanation": "kube-scheduler watches for Pods with no nodeName set, filters out infeasible Nodes, then scores the rest and binds the Pod to the highest-scoring Node."
+  },
+  {
+    "id": "kf-sched-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "easy",
+    "question": "Which field lets a Pod request to run only on Nodes with specific labels (for example disktype=ssd)?",
+    "options": [
+      {"label": "a", "text": "nodeName", "correct": false},
+      {"label": "b", "text": "nodeSelector", "correct": true},
+      {"label": "c", "text": "nodeAffinity", "correct": false},
+      {"label": "d", "text": "tolerations", "correct": false}
+    ],
+    "explanation": "nodeSelector is the simplest Pod-to-Node label-match placement constraint. nodeAffinity is the richer expression-based successor."
+  },
+  {
+    "id": "kf-sched-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "Which scheduling mechanism expresses 'prefer but don't require' placement on specific Nodes?",
+    "options": [
+      {"label": "a", "text": "requiredDuringSchedulingIgnoredDuringExecution", "correct": false},
+      {"label": "b", "text": "preferredDuringSchedulingIgnoredDuringExecution", "correct": true},
+      {"label": "c", "text": "nodeSelector", "correct": false},
+      {"label": "d", "text": "nodeName", "correct": false}
+    ],
+    "explanation": "The `preferred...` variant of nodeAffinity is a soft preference; the scheduler prefers but does not require a match."
+  },
+  {
+    "id": "kf-sched-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "Which pair of mechanisms allows Nodes to repel Pods unless the Pod explicitly tolerates the repulsion?",
+    "options": [
+      {"label": "a", "text": "labels and selectors", "correct": false},
+      {"label": "b", "text": "taints and tolerations", "correct": true},
+      {"label": "c", "text": "affinity and anti-affinity", "correct": false},
+      {"label": "d", "text": "priorities and preemption", "correct": false}
+    ],
+    "explanation": "Taints are applied to Nodes (repulsive property); Pods use tolerations to declare they can be placed on tainted Nodes anyway."
+  },
+  {
+    "id": "kf-sched-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "Which taint effect causes existing Pods without matching tolerations to be evicted?",
+    "options": [
+      {"label": "a", "text": "NoSchedule", "correct": false},
+      {"label": "b", "text": "PreferNoSchedule", "correct": false},
+      {"label": "c", "text": "NoExecute", "correct": true},
+      {"label": "d", "text": "ForceEvict", "correct": false}
+    ],
+    "explanation": "NoExecute also evicts running Pods that do not tolerate it. NoSchedule only prevents new Pods; PreferNoSchedule is a soft version of NoSchedule."
+  },
+  {
+    "id": "kf-sched-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "Which mechanism spreads Pods across failure domains (zones, hostnames) to improve availability?",
+    "options": [
+      {"label": "a", "text": "Pod affinity", "correct": false},
+      {"label": "b", "text": "Topology spread constraints", "correct": true},
+      {"label": "c", "text": "taints", "correct": false},
+      {"label": "d", "text": "nodeSelector", "correct": false}
+    ],
+    "explanation": "topologySpreadConstraints let you bound skew across topology keys (zone, hostname) to achieve balanced placement."
+  },
+  {
+    "id": "kf-sched-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "hard",
+    "question": "When a Pod uses podAntiAffinity with topologyKey: kubernetes.io/hostname, what does it achieve?",
+    "options": [
+      {"label": "a", "text": "Schedule only on Nodes with fast disks", "correct": false},
+      {"label": "b", "text": "Avoid co-locating with other matching Pods on the same Node", "correct": true},
+      {"label": "c", "text": "Schedule only in a specific zone", "correct": false},
+      {"label": "d", "text": "Require the Pod to run everywhere", "correct": false}
+    ],
+    "explanation": "podAntiAffinity with hostname topology spreads replicas across different Nodes, improving fault tolerance."
+  },
+  {
+    "id": "kf-sched-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "easy",
+    "question": "What happens if a user sets a Pod's `spec.nodeName` directly?",
+    "options": [
+      {"label": "a", "text": "The Pod is rejected", "correct": false},
+      {"label": "b", "text": "The scheduler ignores the Pod and kubelet on that Node picks it up directly", "correct": true},
+      {"label": "c", "text": "The Pod is scheduled only after nodeName is removed", "correct": false},
+      {"label": "d", "text": "The Pod is retried on every Node", "correct": false}
+    ],
+    "explanation": "Setting nodeName bypasses the scheduler. The kubelet on that Node notices and starts the Pod. Validity of the placement is the user's responsibility."
+  },
+  {
+    "id": "kf-sched-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "The scheduler decides placement based mostly on which of these?",
+    "options": [
+      {"label": "a", "text": "Pod container image size", "correct": false},
+      {"label": "b", "text": "Pod resource requests and Node allocatable resources", "correct": true},
+      {"label": "c", "text": "Pod labels only", "correct": false},
+      {"label": "d", "text": "Container runtime version", "correct": false}
+    ],
+    "explanation": "Requests are the primary input for scheduling; the scheduler bin-packs Pods by requests onto Node allocatable resources."
+  },
+  {
+    "id": "kf-sched-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "hard",
+    "question": "Which mechanism allows a higher-priority Pod to evict lower-priority Pods when no Node can accommodate it?",
+    "options": [
+      {"label": "a", "text": "Preemption via PriorityClasses", "correct": true},
+      {"label": "b", "text": "Taints", "correct": false},
+      {"label": "c", "text": "LimitRanges", "correct": false},
+      {"label": "d", "text": "PodDisruptionBudgets", "correct": false}
+    ],
+    "explanation": "PriorityClasses + preemption let the scheduler evict lower-priority Pods so an urgent higher-priority Pod can fit. PDBs may influence but do not drive this."
+  },
+  {
+    "id": "kf-sched-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "Which object expresses the minimum number of Pods of an application that must remain available during voluntary disruptions (drains, upgrades)?",
+    "options": [
+      {"label": "a", "text": "PodDisruptionBudget (PDB)", "correct": true},
+      {"label": "b", "text": "PriorityClass", "correct": false},
+      {"label": "c", "text": "LimitRange", "correct": false},
+      {"label": "d", "text": "ResourceQuota", "correct": false}
+    ],
+    "explanation": "A PDB limits how many Pods can be down simultaneously due to voluntary disruptions like `kubectl drain` or rolling Node updates."
+  },
+  {
+    "id": "kf-sched-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "easy",
+    "question": "What is a taint of the form `node-role.kubernetes.io/control-plane:NoSchedule` typically used for?",
+    "options": [
+      {"label": "a", "text": "Prevent regular workloads from running on control-plane Nodes unless they tolerate the taint", "correct": true},
+      {"label": "b", "text": "Mark the Node as GPU-enabled", "correct": false},
+      {"label": "c", "text": "Disable kubelet on that Node", "correct": false},
+      {"label": "d", "text": "Disable metrics for the Node", "correct": false}
+    ],
+    "explanation": "This taint is the standard way kubeadm keeps control-plane Nodes free of user Pods, while still allowing core add-ons (like CNI) to run via tolerations."
+  },
+  {
+    "id": "kf-sched-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "When does the scheduler honour nodeAffinity `requiredDuringSchedulingIgnoredDuringExecution` rules?",
+    "options": [
+      {"label": "a", "text": "Only at Pod scheduling time; existing Pods are not evicted if labels change later", "correct": true},
+      {"label": "b", "text": "At both scheduling and execution", "correct": false},
+      {"label": "c", "text": "Never — it is advisory", "correct": false},
+      {"label": "d", "text": "Only when the Node is rebooted", "correct": false}
+    ],
+    "explanation": "`IgnoredDuringExecution` means the constraint is required to place the Pod but will not re-evict it if Node labels later change."
+  },
+  {
+    "id": "kf-sched-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "medium",
+    "question": "An autoscaler that grows or shrinks the Node pool in response to unschedulable Pods is called:",
+    "options": [
+      {"label": "a", "text": "HorizontalPodAutoscaler", "correct": false},
+      {"label": "b", "text": "VerticalPodAutoscaler", "correct": false},
+      {"label": "c", "text": "Cluster Autoscaler", "correct": true},
+      {"label": "d", "text": "Kube-scheduler", "correct": false}
+    ],
+    "explanation": "Cluster Autoscaler adjusts Node count. HPA changes replica count; VPA adjusts per-Pod resources."
+  },
+  {
+    "id": "kf-sched-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "scheduling",
+    "difficulty": "hard",
+    "question": "Why is `nodeName` considered an escape hatch rather than a best practice for production placement?",
+    "options": [
+      {"label": "a", "text": "It bypasses scheduling constraints, making failures, drains, and rescheduling harder to reason about", "correct": true},
+      {"label": "b", "text": "It is deprecated", "correct": false},
+      {"label": "c", "text": "It is not supported in managed clusters", "correct": false},
+      {"label": "d", "text": "It requires a CRD", "correct": false}
+    ],
+    "explanation": "Hard-coding a Node removes the scheduler's ability to adapt to failures and drains. Labels plus affinity are the idiomatic approach."
+  }
+]

@@ -1,0 +1,212 @@
+[
+  {
+    "id": "cnd-gitops-001",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "easy",
+    "question": "Which statement best describes GitOps?",
+    "options": [
+      {"label": "a", "text": "Git is the single source of truth; an in-cluster agent continuously pulls and reconciles desired state", "correct": true},
+      {"label": "b", "text": "CI pushes to the cluster with cluster credentials", "correct": false},
+      {"label": "c", "text": "GitOps replaces Kubernetes", "correct": false},
+      {"label": "d", "text": "GitOps requires Jenkins", "correct": false}
+    ],
+    "explanation": "GitOps is a pull-based operating model: all desired state is declared in Git, and a controller (Argo CD, Flux) in the cluster reconciles actual state toward it."
+  },
+  {
+    "id": "cnd-gitops-002",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "easy",
+    "question": "Which two CNCF-graduated projects are the most common GitOps controllers?",
+    "options": [
+      {"label": "a", "text": "Argo CD and Flux", "correct": true},
+      {"label": "b", "text": "Prometheus and Grafana", "correct": false},
+      {"label": "c", "text": "Istio and Linkerd", "correct": false},
+      {"label": "d", "text": "Helm and Kustomize", "correct": false}
+    ],
+    "explanation": "Argo CD and Flux CD are both graduated CNCF projects implementing GitOps. They reconcile manifests in Git to live cluster state."
+  },
+  {
+    "id": "cnd-gitops-003",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which claim is a principle of GitOps as described by the OpenGitOps working group?",
+    "options": [
+      {"label": "a", "text": "Desired state is declarative, versioned/immutable in Git, pulled automatically, and continuously reconciled", "correct": true},
+      {"label": "b", "text": "All changes must go through kubectl apply by a human", "correct": false},
+      {"label": "c", "text": "GitOps disallows rollbacks", "correct": false},
+      {"label": "d", "text": "Desired state is imperative and stateful", "correct": false}
+    ],
+    "explanation": "The four OpenGitOps principles are: declarative, versioned and immutable, pulled automatically, and continuously reconciled."
+  },
+  {
+    "id": "cnd-gitops-004",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "To roll out a new container image version via Argo CD, what is the correct first step?",
+    "options": [
+      {"label": "a", "text": "SSH to a control-plane Node and run `kubectl set image`", "correct": false},
+      {"label": "b", "text": "Update the image tag in the manifest/Helm chart in Git, commit, and merge", "correct": true},
+      {"label": "c", "text": "Manually edit the running Deployment on the cluster", "correct": false},
+      {"label": "d", "text": "Restart the Argo CD Pod", "correct": false}
+    ],
+    "explanation": "In GitOps, the source of truth is Git. Any change must originate there; the GitOps controller will reconcile the cluster to match."
+  },
+  {
+    "id": "cnd-gitops-005",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which feature in Argo CD lets you model and deploy a set of manifests as a unit (for example, an entire environment)?",
+    "options": [
+      {"label": "a", "text": "Application", "correct": true},
+      {"label": "b", "text": "Namespace", "correct": false},
+      {"label": "c", "text": "Deployment", "correct": false},
+      {"label": "d", "text": "Ingress", "correct": false}
+    ],
+    "explanation": "Argo CD's `Application` CRD describes a set of Kubernetes manifests sourced from Git to be synced to a target cluster/namespace."
+  },
+  {
+    "id": "cnd-gitops-006",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which of the following is TRUE about GitOps over traditional push-based CD?",
+    "options": [
+      {"label": "a", "text": "Cluster credentials never need to be exposed to CI; the cluster pulls changes itself", "correct": true},
+      {"label": "b", "text": "GitOps requires publishing the kubeconfig to CI logs", "correct": false},
+      {"label": "c", "text": "GitOps requires SSH access to Nodes", "correct": false},
+      {"label": "d", "text": "GitOps removes the need for Git", "correct": false}
+    ],
+    "explanation": "A core security win of pull-based GitOps is keeping cluster credentials inside the cluster. CI never needs direct cluster admin."
+  },
+  {
+    "id": "cnd-gitops-007",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "hard",
+    "question": "Which Argo CD sync-policy option causes the controller to automatically revert drift (manual kubectl edits) back to the state in Git?",
+    "options": [
+      {"label": "a", "text": "selfHeal", "correct": true},
+      {"label": "b", "text": "autosync", "correct": false},
+      {"label": "c", "text": "autopilot", "correct": false},
+      {"label": "d", "text": "strict", "correct": false}
+    ],
+    "explanation": "With `syncPolicy.automated.selfHeal: true`, Argo CD re-applies the Git state whenever it detects cluster drift."
+  },
+  {
+    "id": "cnd-gitops-008",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which Flux controller watches Git repositories and updates an internal artifact used by downstream controllers?",
+    "options": [
+      {"label": "a", "text": "source-controller", "correct": true},
+      {"label": "b", "text": "kustomize-controller", "correct": false},
+      {"label": "c", "text": "helm-controller", "correct": false},
+      {"label": "d", "text": "notification-controller", "correct": false}
+    ],
+    "explanation": "Flux is split into controllers. source-controller polls Git/Helm/OCI sources; kustomize- and helm-controllers apply manifests from those sources."
+  },
+  {
+    "id": "cnd-gitops-009",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which pattern is commonly used to scale GitOps across many clusters by having one \"app of apps\" manage the others?",
+    "options": [
+      {"label": "a", "text": "ApplicationSet / App-of-Apps", "correct": true},
+      {"label": "b", "text": "HelmDefault", "correct": false},
+      {"label": "c", "text": "MultiTenant CRD", "correct": false},
+      {"label": "d", "text": "ClusterSpread", "correct": false}
+    ],
+    "explanation": "Argo CD's App-of-Apps and ApplicationSet patterns template or generate many Applications from a parent resource, simplifying fleet management."
+  },
+  {
+    "id": "cnd-gitops-010",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which of the following is TRUE about GitOps rollbacks?",
+    "options": [
+      {"label": "a", "text": "They are performed by reverting the commit in Git, which causes the controller to reconcile back to the previous state", "correct": true},
+      {"label": "b", "text": "Rollbacks require kubectl rollout undo", "correct": false},
+      {"label": "c", "text": "Rollbacks are not supported in GitOps", "correct": false},
+      {"label": "d", "text": "Rollbacks require restoring an etcd backup", "correct": false}
+    ],
+    "explanation": "Because Git is the source of truth, `git revert` naturally rolls back any change the controller previously applied."
+  },
+  {
+    "id": "cnd-gitops-011",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "hard",
+    "question": "Why is it generally a bad idea to mix manual kubectl edits with an active GitOps controller?",
+    "options": [
+      {"label": "a", "text": "Drift causes the controller to fight the human; observable state becomes unpredictable", "correct": true},
+      {"label": "b", "text": "kubectl does not work if Argo CD is installed", "correct": false},
+      {"label": "c", "text": "Git disables kubectl", "correct": false},
+      {"label": "d", "text": "It corrupts etcd", "correct": false}
+    ],
+    "explanation": "If the controller reconciles toward Git and a human edits the cluster out-of-band, the controller will revert the human's change, or vice versa — leading to unpredictable behavior."
+  },
+  {
+    "id": "cnd-gitops-012",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which sub-project of Argo is used specifically for progressive delivery strategies like canary and blue/green?",
+    "options": [
+      {"label": "a", "text": "Argo Rollouts", "correct": true},
+      {"label": "b", "text": "Argo Workflows", "correct": false},
+      {"label": "c", "text": "Argo Events", "correct": false},
+      {"label": "d", "text": "Argo CI", "correct": false}
+    ],
+    "explanation": "Argo Rollouts replaces the standard Deployment with a richer controller supporting canary, blue/green, and analysis-driven promotion."
+  },
+  {
+    "id": "cnd-gitops-013",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a GitOps principle?",
+    "options": [
+      {"label": "a", "text": "Declarative desired state", "correct": false},
+      {"label": "b", "text": "Versioned, immutable history", "correct": false},
+      {"label": "c", "text": "Continuous reconciliation", "correct": false},
+      {"label": "d", "text": "Manual imperative commands for every deployment", "correct": true}
+    ],
+    "explanation": "Manual imperative commands are the opposite of GitOps. The three other options are official OpenGitOps principles."
+  },
+  {
+    "id": "cnd-gitops-014",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "medium",
+    "question": "A team uses Argo CD to deploy a Helm chart. Where should chart values live in a typical GitOps setup?",
+    "options": [
+      {"label": "a", "text": "In the Git repository alongside the Application manifest, versioned with the code", "correct": true},
+      {"label": "b", "text": "Set interactively via `helm install` on the cluster", "correct": false},
+      {"label": "c", "text": "Only in ConfigMaps edited by hand", "correct": false},
+      {"label": "d", "text": "In the Argo CD database", "correct": false}
+    ],
+    "explanation": "In GitOps, values belong in Git so they are reviewable, auditable, and reproducible."
+  },
+  {
+    "id": "cnd-gitops-015",
+    "domain": "cloud-native-delivery",
+    "subtopic": "gitops-argocd-flux",
+    "difficulty": "hard",
+    "question": "Which pattern is commonly used to keep secrets in Git safely while still using GitOps?",
+    "options": [
+      {"label": "a", "text": "SealedSecrets (Bitnami) or SOPS + age/KMS", "correct": true},
+      {"label": "b", "text": "Storing plaintext Secret manifests", "correct": false},
+      {"label": "c", "text": "Disabling GitOps", "correct": false},
+      {"label": "d", "text": "Base64-encoding only", "correct": false}
+    ],
+    "explanation": "SealedSecrets and SOPS-encrypted YAML are the common ways to commit secrets safely. External Secrets Operator is another option that references an external store."
+  }
+]

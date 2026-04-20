@@ -1,0 +1,226 @@
+[
+  {
+    "id": "cnd-cicd-001",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "easy",
+    "question": "Which of the following best describes Continuous Integration (CI)?",
+    "options": [
+      {"label": "a", "text": "Automated build and test on every commit so integration issues are found quickly", "correct": true},
+      {"label": "b", "text": "Weekly manual releases to production", "correct": false},
+      {"label": "c", "text": "Deploying without tests", "correct": false},
+      {"label": "d", "text": "A quarterly architectural review", "correct": false}
+    ],
+    "explanation": "CI focuses on quickly integrating small changes with automated build and test to catch defects early."
+  },
+  {
+    "id": "cnd-cicd-002",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "easy",
+    "question": "Which of the following best describes Continuous Delivery (CD)?",
+    "options": [
+      {"label": "a", "text": "Every change that passes CI is deployable to production at the push of a button (or automatically, for Continuous Deployment)", "correct": true},
+      {"label": "b", "text": "Only senior engineers can deploy", "correct": false},
+      {"label": "c", "text": "Release once per year", "correct": false},
+      {"label": "d", "text": "Skip tests to deliver faster", "correct": false}
+    ],
+    "explanation": "Continuous Delivery keeps the main branch deployable. Continuous Deployment goes one step further and deploys automatically."
+  },
+  {
+    "id": "cnd-cicd-003",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "easy",
+    "question": "Which tool is a Kubernetes package manager built around templated charts?",
+    "options": [
+      {"label": "a", "text": "Kustomize", "correct": false},
+      {"label": "b", "text": "Helm", "correct": true},
+      {"label": "c", "text": "Jenkins", "correct": false},
+      {"label": "d", "text": "Terraform", "correct": false}
+    ],
+    "explanation": "Helm packages Kubernetes manifests into templated charts and manages releases/rollbacks."
+  },
+  {
+    "id": "cnd-cicd-004",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "easy",
+    "question": "Which tool customizes Kubernetes manifests via YAML overlays without using a templating language?",
+    "options": [
+      {"label": "a", "text": "Helm", "correct": false},
+      {"label": "b", "text": "Kustomize", "correct": true},
+      {"label": "c", "text": "Jsonnet", "correct": false},
+      {"label": "d", "text": "Ansible", "correct": false}
+    ],
+    "explanation": "Kustomize uses a base + overlays model in pure YAML (`kustomization.yaml`). It is built into `kubectl`."
+  },
+  {
+    "id": "cnd-cicd-005",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which CNCF-graduated project provides a Kubernetes-native CI/CD building-block framework using Tasks and Pipelines as CRDs?",
+    "options": [
+      {"label": "a", "text": "Tekton", "correct": true},
+      {"label": "b", "text": "Jenkins", "correct": false},
+      {"label": "c", "text": "Argo CD", "correct": false},
+      {"label": "d", "text": "Spinnaker", "correct": false}
+    ],
+    "explanation": "Tekton exposes CI/CD primitives (Task, Pipeline, PipelineRun) as Kubernetes resources, which engines like Jenkins X and OpenShift Pipelines build on."
+  },
+  {
+    "id": "cnd-cicd-006",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which Argo sub-project orchestrates general-purpose workflows as DAGs on Kubernetes?",
+    "options": [
+      {"label": "a", "text": "Argo Workflows", "correct": true},
+      {"label": "b", "text": "Argo CD", "correct": false},
+      {"label": "c", "text": "Argo Rollouts", "correct": false},
+      {"label": "d", "text": "Argo Events", "correct": false}
+    ],
+    "explanation": "Argo Workflows is a graduated CNCF project for running container-native workflows (CI, ML, data) as DAGs on Kubernetes."
+  },
+  {
+    "id": "cnd-cicd-007",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "A Helm chart is typically composed of which of the following?",
+    "options": [
+      {"label": "a", "text": "Chart.yaml, values.yaml, and a templates/ directory", "correct": true},
+      {"label": "b", "text": "Only a kustomization.yaml", "correct": false},
+      {"label": "c", "text": "A Dockerfile and README", "correct": false},
+      {"label": "d", "text": "A Jenkinsfile", "correct": false}
+    ],
+    "explanation": "A Helm chart defines its metadata in Chart.yaml, default parameters in values.yaml, and parameterized manifests in templates/."
+  },
+  {
+    "id": "cnd-cicd-008",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which of the following is a key difference between Helm and Kustomize?",
+    "options": [
+      {"label": "a", "text": "Helm templates YAML with Go templates; Kustomize patches YAML via overlays without templating", "correct": true},
+      {"label": "b", "text": "Kustomize requires a Helm chart", "correct": false},
+      {"label": "c", "text": "Helm can't use values", "correct": false},
+      {"label": "d", "text": "Kustomize is a runtime, not a CLI", "correct": false}
+    ],
+    "explanation": "Helm's strength is templating + release management. Kustomize's strength is pure-YAML composition and patching."
+  },
+  {
+    "id": "cnd-cicd-009",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which OCI-based distribution path is now supported for Helm charts?",
+    "options": [
+      {"label": "a", "text": "Charts can be pushed and pulled from OCI-compliant registries", "correct": true},
+      {"label": "b", "text": "Charts must be stored as tar.gz on a file server only", "correct": false},
+      {"label": "c", "text": "Charts can only live in chartmuseum", "correct": false},
+      {"label": "d", "text": "Charts cannot be signed", "correct": false}
+    ],
+    "explanation": "Helm added native OCI support so that charts can live alongside container images in any OCI-compliant registry."
+  },
+  {
+    "id": "cnd-cicd-010",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "easy",
+    "question": "Which of the following is NOT typically a CI step?",
+    "options": [
+      {"label": "a", "text": "Building the container image", "correct": false},
+      {"label": "b", "text": "Running unit tests", "correct": false},
+      {"label": "c", "text": "Linting the code", "correct": false},
+      {"label": "d", "text": "Manually SSHing to production", "correct": true}
+    ],
+    "explanation": "CI automates build, test, and quality gates. Manual SSH is the opposite of modern delivery practice."
+  },
+  {
+    "id": "cnd-cicd-011",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which statement about image tags is a best practice in CD pipelines?",
+    "options": [
+      {"label": "a", "text": "Use immutable tags (e.g., git SHA or semantic version) rather than `latest`", "correct": true},
+      {"label": "b", "text": "Always deploy with `:latest`", "correct": false},
+      {"label": "c", "text": "Deploy untagged images", "correct": false},
+      {"label": "d", "text": "Rebuild without tagging", "correct": false}
+    ],
+    "explanation": "Immutable tags make rollouts and rollbacks deterministic. `:latest` is mutable and defeats reproducibility."
+  },
+  {
+    "id": "cnd-cicd-012",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which CNCF project is a multi-cloud application delivery platform with strong support for canary, blue/green, and multi-region pipelines?",
+    "options": [
+      {"label": "a", "text": "Spinnaker", "correct": true},
+      {"label": "b", "text": "Tekton", "correct": false},
+      {"label": "c", "text": "Argo CD", "correct": false},
+      {"label": "d", "text": "Flux", "correct": false}
+    ],
+    "explanation": "Spinnaker originated at Netflix and was designed for multi-cloud, multi-region application delivery pipelines."
+  },
+  {
+    "id": "cnd-cicd-013",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "hard",
+    "question": "Why is building container images inside the cluster with Kaniko or BuildKit preferred over `docker build` for CI on Kubernetes?",
+    "options": [
+      {"label": "a", "text": "It avoids the need for a privileged Docker daemon inside the CI Pod", "correct": true},
+      {"label": "b", "text": "It skips image layers", "correct": false},
+      {"label": "c", "text": "It produces smaller SBOMs", "correct": false},
+      {"label": "d", "text": "It disables caching", "correct": false}
+    ],
+    "explanation": "Kaniko and rootless BuildKit build OCI images without requiring a privileged Docker daemon, which is safer in multi-tenant CI environments."
+  },
+  {
+    "id": "cnd-cicd-014",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which file, if committed to a Helm chart, can define the chart's required Kubernetes API versions and engine constraints?",
+    "options": [
+      {"label": "a", "text": "Chart.yaml (via kubeVersion and apiVersion)", "correct": true},
+      {"label": "b", "text": "values.yaml", "correct": false},
+      {"label": "c", "text": "Chart.lock", "correct": false},
+      {"label": "d", "text": "requirements.yaml", "correct": false}
+    ],
+    "explanation": "Chart.yaml carries metadata including `apiVersion`, `kubeVersion` (constraint), dependencies, and more."
+  },
+  {
+    "id": "cnd-cicd-015",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which `helm` command previews the rendered manifests without installing them?",
+    "options": [
+      {"label": "a", "text": "helm template", "correct": true},
+      {"label": "b", "text": "helm repo update", "correct": false},
+      {"label": "c", "text": "helm rollback", "correct": false},
+      {"label": "d", "text": "helm status", "correct": false}
+    ],
+    "explanation": "`helm template` renders the chart locally so you can inspect or feed the output into GitOps tooling."
+  },
+  {
+    "id": "cnd-cicd-016",
+    "domain": "cloud-native-delivery",
+    "subtopic": "cicd-helm-kustomize",
+    "difficulty": "medium",
+    "question": "Which command is used to apply a Kustomize overlay?",
+    "options": [
+      {"label": "a", "text": "kubectl apply -k <path>", "correct": true},
+      {"label": "b", "text": "helm install", "correct": false},
+      {"label": "c", "text": "kustomize render", "correct": false},
+      {"label": "d", "text": "kubectl deploy", "correct": false}
+    ],
+    "explanation": "Kustomize is built into kubectl: `-k` renders a `kustomization.yaml` and applies the resulting manifests."
+  }
+]

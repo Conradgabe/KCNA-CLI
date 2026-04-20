@@ -1,0 +1,282 @@
+[
+  {
+    "id": "kf-store-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "easy",
+    "question": "Which Kubernetes object stores non-confidential configuration data as key/value pairs that Pods can consume as environment variables or files?",
+    "options": [
+      {"label": "a", "text": "Secret", "correct": false},
+      {"label": "b", "text": "ConfigMap", "correct": true},
+      {"label": "c", "text": "PersistentVolume", "correct": false},
+      {"label": "d", "text": "StorageClass", "correct": false}
+    ],
+    "explanation": "ConfigMaps decouple config from container images. They are not encrypted and should not hold credentials."
+  },
+  {
+    "id": "kf-store-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "easy",
+    "question": "Which Kubernetes object is intended to hold small sensitive values such as passwords, tokens, and TLS keys?",
+    "options": [
+      {"label": "a", "text": "Secret", "correct": true},
+      {"label": "b", "text": "ConfigMap", "correct": false},
+      {"label": "c", "text": "PVC", "correct": false},
+      {"label": "d", "text": "ServiceAccount", "correct": false}
+    ],
+    "explanation": "Secrets are typed, base64-encoded objects meant for sensitive data. Encryption at rest in etcd requires explicit configuration."
+  },
+  {
+    "id": "kf-store-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "How are Kubernetes Secrets encoded by default on disk in etcd?",
+    "options": [
+      {"label": "a", "text": "AES-256 encrypted by default", "correct": false},
+      {"label": "b", "text": "Base64-encoded plaintext unless encryption-at-rest is explicitly configured", "correct": true},
+      {"label": "c", "text": "Hashed with bcrypt", "correct": false},
+      {"label": "d", "text": "Stored only in memory, never written to disk", "correct": false}
+    ],
+    "explanation": "Base64 is encoding, not encryption. Cluster operators must enable EncryptionConfiguration or a KMS provider to encrypt Secrets at rest."
+  },
+  {
+    "id": "kf-store-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which object represents a request by a user for a specific size and access mode of persistent storage?",
+    "options": [
+      {"label": "a", "text": "PersistentVolume (PV)", "correct": false},
+      {"label": "b", "text": "PersistentVolumeClaim (PVC)", "correct": true},
+      {"label": "c", "text": "StorageClass", "correct": false},
+      {"label": "d", "text": "VolumeAttachment", "correct": false}
+    ],
+    "explanation": "Users create PVCs; the control plane binds them to a matching PV (or dynamically provisions one through a StorageClass)."
+  },
+  {
+    "id": "kf-store-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which object describes an actual piece of storage (NFS share, EBS volume, etc.) available to the cluster?",
+    "options": [
+      {"label": "a", "text": "PersistentVolume (PV)", "correct": true},
+      {"label": "b", "text": "PersistentVolumeClaim (PVC)", "correct": false},
+      {"label": "c", "text": "StorageClass", "correct": false},
+      {"label": "d", "text": "Volume", "correct": false}
+    ],
+    "explanation": "A PV is the cluster-wide storage resource. Claims (PVCs) consume PVs. `Volume` is a Pod-level concept, not a standalone resource."
+  },
+  {
+    "id": "kf-store-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which object describes the kind of storage that should be dynamically provisioned when a user asks for it?",
+    "options": [
+      {"label": "a", "text": "PersistentVolume", "correct": false},
+      {"label": "b", "text": "StorageClass", "correct": true},
+      {"label": "c", "text": "PersistentVolumeClaim", "correct": false},
+      {"label": "d", "text": "VolumeSnapshot", "correct": false}
+    ],
+    "explanation": "A StorageClass points at a provisioner (CSI driver) and parameters (disk type, IOPS, encryption). A PVC that references it triggers dynamic provisioning."
+  },
+  {
+    "id": "kf-store-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which PV access mode means the volume can be mounted read-write by exactly one node at a time?",
+    "options": [
+      {"label": "a", "text": "ReadWriteOnce (RWO)", "correct": true},
+      {"label": "b", "text": "ReadOnlyMany (ROX)", "correct": false},
+      {"label": "c", "text": "ReadWriteMany (RWX)", "correct": false},
+      {"label": "d", "text": "ReadWriteOncePod (RWOP)", "correct": false}
+    ],
+    "explanation": "RWO is the classic access mode for block storage (EBS, GCE PD, Azure Disk). RWOP is a newer mode that scopes to a single Pod."
+  },
+  {
+    "id": "kf-store-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "hard",
+    "question": "Which access mode restricts a volume to read-write access from a single Pod, not just a single Node?",
+    "options": [
+      {"label": "a", "text": "ReadWriteOnce (RWO)", "correct": false},
+      {"label": "b", "text": "ReadWriteMany (RWX)", "correct": false},
+      {"label": "c", "text": "ReadWriteOncePod (RWOP)", "correct": true},
+      {"label": "d", "text": "ReadOnlyOnce (ROO)", "correct": false}
+    ],
+    "explanation": "RWOP was added to handle cases where multiple Pods on the same Node could otherwise mount the same RWO volume, which was usually unsafe."
+  },
+  {
+    "id": "kf-store-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which ConfigMap consumption pattern reflects changes to the ConfigMap without restarting the Pod?",
+    "options": [
+      {"label": "a", "text": "Mounted as a volume", "correct": true},
+      {"label": "b", "text": "Injected as environment variables via envFrom", "correct": false},
+      {"label": "c", "text": "Loaded at Pod creation via init container", "correct": false},
+      {"label": "d", "text": "Stored as a label", "correct": false}
+    ],
+    "explanation": "Volume-mounted ConfigMaps are periodically refreshed by kubelet. Environment variables are resolved only at Pod start and do not update live."
+  },
+  {
+    "id": "kf-store-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "What is the maximum size of a single Secret or ConfigMap?",
+    "options": [
+      {"label": "a", "text": "1 KiB", "correct": false},
+      {"label": "b", "text": "1 MiB", "correct": true},
+      {"label": "c", "text": "10 MiB", "correct": false},
+      {"label": "d", "text": "Unlimited", "correct": false}
+    ],
+    "explanation": "Both Secrets and ConfigMaps are capped at 1 MiB because they are stored in etcd. Large blobs belong in a volume."
+  },
+  {
+    "id": "kf-store-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which volume type is a scratch space shared between containers in a Pod and deleted when the Pod is removed?",
+    "options": [
+      {"label": "a", "text": "emptyDir", "correct": true},
+      {"label": "b", "text": "hostPath", "correct": false},
+      {"label": "c", "text": "persistentVolumeClaim", "correct": false},
+      {"label": "d", "text": "configMap", "correct": false}
+    ],
+    "explanation": "emptyDir is created when the Pod is assigned to a Node and deleted when the Pod is removed. Useful for temporary space shared between containers."
+  },
+  {
+    "id": "kf-store-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "hard",
+    "question": "Which volume type mounts a file or directory from the Node's filesystem into a Pod and carries security risk?",
+    "options": [
+      {"label": "a", "text": "emptyDir", "correct": false},
+      {"label": "b", "text": "hostPath", "correct": true},
+      {"label": "c", "text": "projected", "correct": false},
+      {"label": "d", "text": "downwardAPI", "correct": false}
+    ],
+    "explanation": "hostPath exposes the underlying Node filesystem and is commonly restricted in production because it can be used to escape the container sandbox."
+  },
+  {
+    "id": "kf-store-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which StorageClass reclaim policy causes the underlying volume to be deleted when its PVC is released?",
+    "options": [
+      {"label": "a", "text": "Retain", "correct": false},
+      {"label": "b", "text": "Delete", "correct": true},
+      {"label": "c", "text": "Recycle", "correct": false},
+      {"label": "d", "text": "Archive", "correct": false}
+    ],
+    "explanation": "Delete (the common cloud-managed default) removes the backing volume. Retain keeps data for manual cleanup. Recycle is deprecated."
+  },
+  {
+    "id": "kf-store-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which field makes a PVC wait until a Pod that uses it is scheduled before provisioning the PV?",
+    "options": [
+      {"label": "a", "text": "volumeBindingMode: WaitForFirstConsumer on the StorageClass", "correct": true},
+      {"label": "b", "text": "reclaimPolicy: Retain", "correct": false},
+      {"label": "c", "text": "accessModes: ReadWriteOnce", "correct": false},
+      {"label": "d", "text": "mountOptions: delayed", "correct": false}
+    ],
+    "explanation": "WaitForFirstConsumer defers binding until a Pod consuming the PVC is scheduled, ensuring the volume is provisioned in the right zone/topology."
+  },
+  {
+    "id": "kf-store-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which Kubernetes concept represents the identity under which a Pod authenticates to the API server?",
+    "options": [
+      {"label": "a", "text": "Secret", "correct": false},
+      {"label": "b", "text": "Role", "correct": false},
+      {"label": "c", "text": "ServiceAccount", "correct": true},
+      {"label": "d", "text": "User", "correct": false}
+    ],
+    "explanation": "Each Pod runs as a ServiceAccount (default if unspecified). Its token is what Pods present to the API when making in-cluster calls."
+  },
+  {
+    "id": "kf-store-016",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which Kubernetes mechanism provides short-lived, audience-bound tokens to Pods instead of long-lived Secrets?",
+    "options": [
+      {"label": "a", "text": "ImagePullSecrets", "correct": false},
+      {"label": "b", "text": "Projected ServiceAccount tokens (TokenRequest API)", "correct": true},
+      {"label": "c", "text": "BootstrapTokens", "correct": false},
+      {"label": "d", "text": "Static tokens in kubeconfig", "correct": false}
+    ],
+    "explanation": "Modern Kubernetes mounts time-bound audience-scoped SA tokens via the projected-volume + TokenRequest API. The legacy long-lived SA Secret token is deprecated."
+  },
+  {
+    "id": "kf-store-017",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "hard",
+    "question": "A team needs shared read-write storage across several Pods running on different Nodes. Which access mode must the underlying volume support?",
+    "options": [
+      {"label": "a", "text": "ReadWriteOnce", "correct": false},
+      {"label": "b", "text": "ReadWriteMany", "correct": true},
+      {"label": "c", "text": "ReadOnlyOnce", "correct": false},
+      {"label": "d", "text": "ReadWriteOncePod", "correct": false}
+    ],
+    "explanation": "RWX is needed so multiple Nodes can mount the same volume concurrently. Backends that support RWX include NFS, CephFS, and cloud filers like EFS."
+  },
+  {
+    "id": "kf-store-018",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "Which field in a Pod spec lets a workload consume the image from a private registry using authenticated credentials?",
+    "options": [
+      {"label": "a", "text": "imagePullSecrets", "correct": true},
+      {"label": "b", "text": "privateRegistry", "correct": false},
+      {"label": "c", "text": "secretRef", "correct": false},
+      {"label": "d", "text": "credentialsRef", "correct": false}
+    ],
+    "explanation": "imagePullSecrets references one or more docker-registry-type Secrets in the Pod's namespace. Kubelet uses them to authenticate to the registry."
+  },
+  {
+    "id": "kf-store-019",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "medium",
+    "question": "What is the relationship between a StatefulSet replica and its PVC?",
+    "options": [
+      {"label": "a", "text": "All replicas share one PVC", "correct": false},
+      {"label": "b", "text": "Each ordinal replica gets its own stable PVC created from the volumeClaimTemplates", "correct": true},
+      {"label": "c", "text": "StatefulSets do not support PVCs", "correct": false},
+      {"label": "d", "text": "PVCs are random per restart", "correct": false}
+    ],
+    "explanation": "StatefulSet's volumeClaimTemplates generate PVC-per-replica (web-0, web-1, ...). The PVC survives Pod deletion so data persists."
+  },
+  {
+    "id": "kf-store-020",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "storage-configuration",
+    "difficulty": "hard",
+    "question": "Which volume type projects multiple sources (ConfigMap, Secret, downwardAPI, service-account token) into a single directory in the Pod?",
+    "options": [
+      {"label": "a", "text": "emptyDir", "correct": false},
+      {"label": "b", "text": "projected", "correct": true},
+      {"label": "c", "text": "configMap", "correct": false},
+      {"label": "d", "text": "downwardAPI", "correct": false}
+    ],
+    "explanation": "A projected volume combines multiple source types into one mount path. It is the mechanism behind modern SA-token mounts."
+  }
+]

@@ -1,0 +1,93 @@
+Screen {
+    background: $surface;
+}
+
+#title-banner {
+    color: $accent;
+    text-style: bold;
+    content-align: center middle;
+    padding: 2;
+}
+
+.title-info {
+    content-align: center middle;
+    padding: 1;
+}
+
+#title-start-hint {
+    content-align: center middle;
+    padding: 2;
+    color: $success;
+}
+
+#exam-header {
+    height: 3;
+    background: $panel;
+    padding: 1 2;
+}
+
+#exam-footer {
+    dock: bottom;
+    height: 1;
+    background: $panel-darken-1;
+    padding: 0 2;
+    color: $text-muted;
+}
+
+#exam-card {
+    height: 1fr;
+    overflow-y: auto;
+}
+
+.result-banner-pass {
+    color: $success;
+    text-style: bold;
+    content-align: center middle;
+    padding: 2;
+}
+
+.result-banner-fail {
+    color: $error;
+    text-style: bold;
+    content-align: center middle;
+    padding: 2;
+}
+
+.result-section {
+    padding: 1 2;
+}
+
+.review-option-correct {
+    color: $success;
+    text-style: bold;
+    padding: 0 2;
+}
+
+.review-option-wrong {
+    color: $error;
+    text-style: bold;
+    padding: 0 2;
+}
+
+.review-option-normal {
+    color: $text-muted;
+    padding: 0 2;
+}
+
+.review-explanation {
+    padding: 1 2;
+    margin-top: 1;
+    background: $panel;
+}
+
+.practice-feedback-correct {
+    color: $success;
+    text-style: bold;
+    padding: 1 2;
+}
+
+.practice-feedback-wrong {
+    color: $error;
+    text-style: bold;
+    padding: 1 2;
+}

@@ -1,0 +1,352 @@
+[
+  {
+    "id": "kf-wl-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "What is the smallest deployable and schedulable unit in Kubernetes?",
+    "options": [
+      {"label": "a", "text": "Container", "correct": false},
+      {"label": "b", "text": "Node", "correct": false},
+      {"label": "c", "text": "Pod", "correct": true},
+      {"label": "d", "text": "Deployment", "correct": false}
+    ],
+    "explanation": "A Pod is the atomic scheduling unit. It can hold one or more tightly-coupled containers that share the same network namespace and storage volumes."
+  },
+  {
+    "id": "kf-wl-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "Which workload resource is the recommended way to run a scalable, stateless web service?",
+    "options": [
+      {"label": "a", "text": "ReplicaSet", "correct": false},
+      {"label": "b", "text": "Deployment", "correct": true},
+      {"label": "c", "text": "DaemonSet", "correct": false},
+      {"label": "d", "text": "Job", "correct": false}
+    ],
+    "explanation": "A Deployment declaratively manages ReplicaSets, providing rolling updates, rollbacks, and scaling out of the box."
+  },
+  {
+    "id": "kf-wl-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "Which workload resource guarantees exactly one matching Pod per selected Node?",
+    "options": [
+      {"label": "a", "text": "StatefulSet", "correct": false},
+      {"label": "b", "text": "Deployment", "correct": false},
+      {"label": "c", "text": "DaemonSet", "correct": true},
+      {"label": "d", "text": "ReplicaSet", "correct": false}
+    ],
+    "explanation": "A DaemonSet runs one Pod on each (selected) Node. It is the standard resource for node agents like log shippers and CNI daemons."
+  },
+  {
+    "id": "kf-wl-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which workload resource provides stable network identities and ordered, graceful scaling for stateful applications?",
+    "options": [
+      {"label": "a", "text": "StatefulSet", "correct": true},
+      {"label": "b", "text": "Deployment", "correct": false},
+      {"label": "c", "text": "DaemonSet", "correct": false},
+      {"label": "d", "text": "Job", "correct": false}
+    ],
+    "explanation": "A StatefulSet creates Pods with stable names (foo-0, foo-1), stable per-Pod storage, and ordered start/stop/update — appropriate for databases and clustered systems."
+  },
+  {
+    "id": "kf-wl-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "Which workload resource runs a Pod to completion for a one-off batch task?",
+    "options": [
+      {"label": "a", "text": "Deployment", "correct": false},
+      {"label": "b", "text": "Job", "correct": true},
+      {"label": "c", "text": "StatefulSet", "correct": false},
+      {"label": "d", "text": "DaemonSet", "correct": false}
+    ],
+    "explanation": "A Job creates one or more Pods and ensures that a specified number of them successfully terminate."
+  },
+  {
+    "id": "kf-wl-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "Which workload resource runs a Job on a recurring schedule expressed in cron syntax?",
+    "options": [
+      {"label": "a", "text": "Deployment", "correct": false},
+      {"label": "b", "text": "CronJob", "correct": true},
+      {"label": "c", "text": "DaemonSet", "correct": false},
+      {"label": "d", "text": "StatefulSet", "correct": false}
+    ],
+    "explanation": "A CronJob schedules a Job at each matching time slot; the Job then creates Pods that run to completion."
+  },
+  {
+    "id": "kf-wl-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "When a CronJob triggers, which controller chain ultimately creates the Pod?",
+    "options": [
+      {"label": "a", "text": "Kubelet creates the Pod directly from cron", "correct": false},
+      {"label": "b", "text": "CronJob controller creates a Job; the Job controller creates the Pod", "correct": true},
+      {"label": "c", "text": "Scheduler creates the Pod from a CronSpec", "correct": false},
+      {"label": "d", "text": "The CronJob controller creates the Pod directly", "correct": false}
+    ],
+    "explanation": "CronJob → Job → Pod is the standard controller chain; each layer has a dedicated controller reconciling its children."
+  },
+  {
+    "id": "kf-wl-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "A team needs to run a Fluent Bit log-collection agent on every Linux node so it can tail /var/log. Which resource best fits?",
+    "options": [
+      {"label": "a", "text": "Deployment", "correct": false},
+      {"label": "b", "text": "StatefulSet", "correct": false},
+      {"label": "c", "text": "DaemonSet", "correct": true},
+      {"label": "d", "text": "Job", "correct": false}
+    ],
+    "explanation": "DaemonSet guarantees one Pod per Node and is the idiomatic way to run per-node agents."
+  },
+  {
+    "id": "kf-wl-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which resource directly manages a fixed number of Pod replicas but lacks rolling-update and rollback semantics?",
+    "options": [
+      {"label": "a", "text": "Deployment", "correct": false},
+      {"label": "b", "text": "ReplicaSet", "correct": true},
+      {"label": "c", "text": "StatefulSet", "correct": false},
+      {"label": "d", "text": "ReplicationController", "correct": false}
+    ],
+    "explanation": "ReplicaSet only ensures the desired number of Pods exist. Rolling updates are a feature of the higher-level Deployment, which manages ReplicaSets."
+  },
+  {
+    "id": "kf-wl-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "Inside a Pod with two containers, how do the containers communicate with one another over localhost?",
+    "options": [
+      {"label": "a", "text": "They share the Pod's network namespace, so localhost on any port works", "correct": true},
+      {"label": "b", "text": "They must each expose a NodePort", "correct": false},
+      {"label": "c", "text": "They communicate over the Service CIDR", "correct": false},
+      {"label": "d", "text": "They use kube-proxy rules", "correct": false}
+    ],
+    "explanation": "All containers in a Pod share a network namespace, so they see each other on 127.0.0.1 and must not collide on ports."
+  },
+  {
+    "id": "kf-wl-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which Pod feature is designed to initialize shared state and must complete successfully before any main containers start?",
+    "options": [
+      {"label": "a", "text": "Sidecar container", "correct": false},
+      {"label": "b", "text": "Init container", "correct": true},
+      {"label": "c", "text": "Ephemeral container", "correct": false},
+      {"label": "d", "text": "Static container", "correct": false}
+    ],
+    "explanation": "Init containers run sequentially to completion before the Pod's main containers start — useful for setup, migrations, or waiting on dependencies."
+  },
+  {
+    "id": "kf-wl-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which container type is typically attached to a running Pod only for interactive debugging and is not restarted on failure?",
+    "options": [
+      {"label": "a", "text": "Init container", "correct": false},
+      {"label": "b", "text": "Sidecar container", "correct": false},
+      {"label": "c", "text": "Ephemeral container", "correct": true},
+      {"label": "d", "text": "Static container", "correct": false}
+    ],
+    "explanation": "Ephemeral containers are injected into an existing Pod via `kubectl debug` for diagnostic purposes and cannot be restarted."
+  },
+  {
+    "id": "kf-wl-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "When a Deployment rolling update happens, which resource does the Deployment controller actually create and scale?",
+    "options": [
+      {"label": "a", "text": "A new Pod per revision", "correct": false},
+      {"label": "b", "text": "A new ReplicaSet for the new revision and scales down the old ReplicaSet", "correct": true},
+      {"label": "c", "text": "A new StatefulSet", "correct": false},
+      {"label": "d", "text": "A new DaemonSet", "correct": false}
+    ],
+    "explanation": "Each new revision of a Deployment creates a new ReplicaSet; the old ReplicaSet is scaled down as the new one is scaled up, preserving rollback."
+  },
+  {
+    "id": "kf-wl-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a valid Pod restart policy?",
+    "options": [
+      {"label": "a", "text": "Always", "correct": false},
+      {"label": "b", "text": "OnFailure", "correct": false},
+      {"label": "c", "text": "Never", "correct": false},
+      {"label": "d", "text": "ExponentialBackoff", "correct": true}
+    ],
+    "explanation": "Valid values for restartPolicy are Always, OnFailure, and Never. Kubernetes applies exponential back-off between crash restarts but that is not a policy name."
+  },
+  {
+    "id": "kf-wl-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which probe tells Kubernetes whether a container should be restarted because it has become deadlocked or unresponsive?",
+    "options": [
+      {"label": "a", "text": "Readiness probe", "correct": false},
+      {"label": "b", "text": "Liveness probe", "correct": true},
+      {"label": "c", "text": "Startup probe", "correct": false},
+      {"label": "d", "text": "Health probe", "correct": false}
+    ],
+    "explanation": "A failing liveness probe tells kubelet to restart the container. Readiness controls Service endpoints; startup grants grace for slow-booting apps."
+  },
+  {
+    "id": "kf-wl-016",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which probe determines whether a Pod should currently receive traffic from a Service?",
+    "options": [
+      {"label": "a", "text": "Liveness probe", "correct": false},
+      {"label": "b", "text": "Readiness probe", "correct": true},
+      {"label": "c", "text": "Startup probe", "correct": false},
+      {"label": "d", "text": "Heartbeat probe", "correct": false}
+    ],
+    "explanation": "Readiness probes gate inclusion in Service endpoints. A failing readiness probe removes the Pod from routing without restarting it."
+  },
+  {
+    "id": "kf-wl-017",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "hard",
+    "question": "A legacy app takes 90 seconds to finish its heavy startup. Which probe should be used so that liveness does not kill it during boot?",
+    "options": [
+      {"label": "a", "text": "Readiness probe", "correct": false},
+      {"label": "b", "text": "Startup probe", "correct": true},
+      {"label": "c", "text": "Liveness probe only, with a long initialDelaySeconds", "correct": false},
+      {"label": "d", "text": "Exec probe", "correct": false}
+    ],
+    "explanation": "startupProbe was introduced precisely for this case. While it runs, liveness and readiness are disabled; once it succeeds the others take over."
+  },
+  {
+    "id": "kf-wl-018",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "A Pod container exceeds its memory limit set via cgroups. What happens?",
+    "options": [
+      {"label": "a", "text": "The memory spills to the host with no effect", "correct": false},
+      {"label": "b", "text": "The Linux OOM killer terminates the offending process; the container may restart depending on restartPolicy", "correct": true},
+      {"label": "c", "text": "Kubernetes throttles the container to 90%", "correct": false},
+      {"label": "d", "text": "The Pod is paused", "correct": false}
+    ],
+    "explanation": "cgroups enforce hard memory limits via the kernel OOM killer. For CPU, limits are throttled, not killed, but memory has no compressible equivalent."
+  },
+  {
+    "id": "kf-wl-019",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which statement about resource requests and limits is TRUE?",
+    "options": [
+      {"label": "a", "text": "Requests are used for scheduling; limits cap consumption at runtime", "correct": true},
+      {"label": "b", "text": "Requests cap consumption; limits are used for scheduling", "correct": false},
+      {"label": "c", "text": "Both are advisory", "correct": false},
+      {"label": "d", "text": "Requests apply only to StatefulSets", "correct": false}
+    ],
+    "explanation": "The scheduler uses the sum of requests to bin-pack Pods onto Nodes. cgroups enforce limits at runtime — CPU throttled, memory OOM-killed when exceeded."
+  },
+  {
+    "id": "kf-wl-020",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which statement best describes a StatefulSet's naming guarantee?",
+    "options": [
+      {"label": "a", "text": "Pods get random hash suffixes like a Deployment", "correct": false},
+      {"label": "b", "text": "Pods get stable ordinal names (e.g., web-0, web-1) and are created/deleted in order", "correct": true},
+      {"label": "c", "text": "Pods are renamed on every restart", "correct": false},
+      {"label": "d", "text": "Pod names include the Node hostname", "correct": false}
+    ],
+    "explanation": "Ordinal, stable identities plus stable per-Pod PVCs are the defining features of a StatefulSet."
+  },
+  {
+    "id": "kf-wl-021",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "hard",
+    "question": "Which statement about the `kind: Pod` resource is TRUE in modern clusters?",
+    "options": [
+      {"label": "a", "text": "Pods should usually be created directly; controllers are optional", "correct": false},
+      {"label": "b", "text": "Pods are almost always created indirectly through a controller (Deployment, Job, StatefulSet, DaemonSet)", "correct": true},
+      {"label": "c", "text": "Pods cannot be created by humans", "correct": false},
+      {"label": "d", "text": "Pods can only contain one container", "correct": false}
+    ],
+    "explanation": "Bare Pods are rare in production: they aren't rescheduled if their Node dies. Controllers are the standard abstraction."
+  },
+  {
+    "id": "kf-wl-022",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "Which feature lets a Job run multiple parallel Pods and succeed only when a fixed number have completed?",
+    "options": [
+      {"label": "a", "text": "completions + parallelism fields on the Job spec", "correct": true},
+      {"label": "b", "text": "A separate parallelism controller", "correct": false},
+      {"label": "c", "text": "CronJob schedule", "correct": false},
+      {"label": "d", "text": "Pod affinity", "correct": false}
+    ],
+    "explanation": "Jobs support `.spec.completions` (how many successful completions are needed) and `.spec.parallelism` (how many Pods may run at once)."
+  },
+  {
+    "id": "kf-wl-023",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "easy",
+    "question": "A team wants a container that runs once at Pod startup to migrate a database schema, then exits before the main app starts. Which mechanism fits best?",
+    "options": [
+      {"label": "a", "text": "Init container", "correct": true},
+      {"label": "b", "text": "Sidecar container", "correct": false},
+      {"label": "c", "text": "Ephemeral container", "correct": false},
+      {"label": "d", "text": "PreStop hook", "correct": false}
+    ],
+    "explanation": "Init containers run to completion before main containers start, which is exactly the ordering required for a migration step."
+  },
+  {
+    "id": "kf-wl-024",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "medium",
+    "question": "What happens to Pods of a Deployment if the Deployment is deleted with default cascading behavior?",
+    "options": [
+      {"label": "a", "text": "The Pods remain and become orphaned", "correct": false},
+      {"label": "b", "text": "The ReplicaSet and its Pods are garbage-collected", "correct": true},
+      {"label": "c", "text": "Only the ReplicaSet is deleted", "correct": false},
+      {"label": "d", "text": "Pods are converted to static Pods", "correct": false}
+    ],
+    "explanation": "By default Kubernetes uses foreground/background cascading deletion driven by ownerReferences, which removes the Deployment's child ReplicaSet and its Pods."
+  },
+  {
+    "id": "kf-wl-025",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "workloads",
+    "difficulty": "hard",
+    "question": "Which rolling-update parameter on a Deployment caps the number of Pods that can be unavailable during the update?",
+    "options": [
+      {"label": "a", "text": "maxSurge", "correct": false},
+      {"label": "b", "text": "maxUnavailable", "correct": true},
+      {"label": "c", "text": "progressDeadlineSeconds", "correct": false},
+      {"label": "d", "text": "minReadySeconds", "correct": false}
+    ],
+    "explanation": "`maxUnavailable` bounds the number (or percentage) of Pods that can be down simultaneously. `maxSurge` bounds the number of extras that can be spun up."
+  }
+]

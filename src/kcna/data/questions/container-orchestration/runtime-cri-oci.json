@@ -1,0 +1,254 @@
+[
+  {
+    "id": "co-run-001",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "Which open standard defines the on-disk layout of a container image?",
+    "options": [
+      {"label": "a", "text": "CRI", "correct": false},
+      {"label": "b", "text": "OCI Image Specification", "correct": true},
+      {"label": "c", "text": "CNI", "correct": false},
+      {"label": "d", "text": "CSI", "correct": false}
+    ],
+    "explanation": "The OCI (Open Container Initiative) Image Specification defines the image format. OCI also has Runtime and Distribution specifications."
+  },
+  {
+    "id": "co-run-002",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "Which gRPC interface does kubelet use to talk to container runtimes like containerd and CRI-O?",
+    "options": [
+      {"label": "a", "text": "CNI", "correct": false},
+      {"label": "b", "text": "CSI", "correct": false},
+      {"label": "c", "text": "CRI", "correct": true},
+      {"label": "d", "text": "OCI", "correct": false}
+    ],
+    "explanation": "CRI (Container Runtime Interface) is the pluggable gRPC API that decouples kubelet from specific runtimes."
+  },
+  {
+    "id": "co-run-003",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "Which of the following is the OCI reference low-level runtime?",
+    "options": [
+      {"label": "a", "text": "runc", "correct": true},
+      {"label": "b", "text": "containerd", "correct": false},
+      {"label": "c", "text": "Docker Engine", "correct": false},
+      {"label": "d", "text": "CRI-O", "correct": false}
+    ],
+    "explanation": "runc is the OCI runtime reference implementation. containerd and CRI-O are higher-level runtimes that invoke runc."
+  },
+  {
+    "id": "co-run-004",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which of the following provides a stronger isolation boundary than plain Linux namespaces by running each Pod inside a lightweight VM?",
+    "options": [
+      {"label": "a", "text": "runc", "correct": false},
+      {"label": "b", "text": "Kata Containers", "correct": true},
+      {"label": "c", "text": "containerd", "correct": false},
+      {"label": "d", "text": "CRI-O", "correct": false}
+    ],
+    "explanation": "Kata Containers runs workloads inside lightweight VMs for hardware-level isolation while still presenting an OCI-compatible interface."
+  },
+  {
+    "id": "co-run-005",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which sandbox runtime intercepts syscalls in userspace using a Go-based kernel, trading some compatibility for isolation?",
+    "options": [
+      {"label": "a", "text": "runc", "correct": false},
+      {"label": "b", "text": "gVisor", "correct": true},
+      {"label": "c", "text": "CRI-O", "correct": false},
+      {"label": "d", "text": "Kata Containers", "correct": false}
+    ],
+    "explanation": "gVisor implements a userspace kernel (the Sentry) that intermediates between the workload and the host syscall interface."
+  },
+  {
+    "id": "co-run-006",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "Kubernetes deprecated the dockershim in 1.24. What replaced Docker Engine as a runtime?",
+    "options": [
+      {"label": "a", "text": "CRI-compatible runtimes such as containerd and CRI-O", "correct": true},
+      {"label": "b", "text": "Podman engine", "correct": false},
+      {"label": "c", "text": "LXC", "correct": false},
+      {"label": "d", "text": "systemd-nspawn", "correct": false}
+    ],
+    "explanation": "Kubernetes only calls into CRI. containerd and CRI-O speak CRI natively; Docker Engine required the shim layer."
+  },
+  {
+    "id": "co-run-007",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which open standard defines how container image registries serve and distribute images?",
+    "options": [
+      {"label": "a", "text": "OCI Distribution Specification", "correct": true},
+      {"label": "b", "text": "OCI Runtime Specification", "correct": false},
+      {"label": "c", "text": "CRI", "correct": false},
+      {"label": "d", "text": "CNCF Landscape Spec", "correct": false}
+    ],
+    "explanation": "The OCI Distribution Specification defines the HTTP/JSON API used by registries like Harbor, ECR, ACR, Artifactory, and Docker Hub."
+  },
+  {
+    "id": "co-run-008",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "Which statement about OCI is TRUE?",
+    "options": [
+      {"label": "a", "text": "OCI is a runtime", "correct": false},
+      {"label": "b", "text": "OCI is a governance body that maintains image, runtime, and distribution specifications", "correct": true},
+      {"label": "c", "text": "OCI is a Kubernetes SIG", "correct": false},
+      {"label": "d", "text": "OCI is a CNI plugin", "correct": false}
+    ],
+    "explanation": "The Open Container Initiative, housed under the Linux Foundation, publishes specifications; implementations (runc, containerd, registries) conform to them."
+  },
+  {
+    "id": "co-run-009",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "What is the purpose of the `pause` container in a Kubernetes Pod?",
+    "options": [
+      {"label": "a", "text": "It runs application code", "correct": false},
+      {"label": "b", "text": "It holds the Pod's network and IPC namespaces so other containers can join them", "correct": true},
+      {"label": "c", "text": "It pauses a Pod for debugging", "correct": false},
+      {"label": "d", "text": "It stores configuration", "correct": false}
+    ],
+    "explanation": "The pause (sandbox) container owns the shared namespaces of the Pod. All other containers join those namespaces and can thus share network and IPC."
+  },
+  {
+    "id": "co-run-010",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which Linux kernel mechanism isolates processes so they see their own PID space, mounts, network interfaces, etc.?",
+    "options": [
+      {"label": "a", "text": "Namespaces", "correct": true},
+      {"label": "b", "text": "cgroups", "correct": false},
+      {"label": "c", "text": "SELinux", "correct": false},
+      {"label": "d", "text": "Capabilities", "correct": false}
+    ],
+    "explanation": "Namespaces provide isolation (what a process can see). cgroups control resource usage (how much it can use). Both are used to implement containers."
+  },
+  {
+    "id": "co-run-011",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which Linux kernel mechanism bounds CPU and memory usage of a container?",
+    "options": [
+      {"label": "a", "text": "Namespaces", "correct": false},
+      {"label": "b", "text": "cgroups (control groups)", "correct": true},
+      {"label": "c", "text": "AppArmor", "correct": false},
+      {"label": "d", "text": "iptables", "correct": false}
+    ],
+    "explanation": "cgroups v1/v2 enforce CPU, memory, IO, pids, and other resource limits per container."
+  },
+  {
+    "id": "co-run-012",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "easy",
+    "question": "What is a container image layer?",
+    "options": [
+      {"label": "a", "text": "A tarball of filesystem changes relative to a parent layer", "correct": true},
+      {"label": "b", "text": "A running process", "correct": false},
+      {"label": "c", "text": "A Docker network", "correct": false},
+      {"label": "d", "text": "A namespace type", "correct": false}
+    ],
+    "explanation": "Images are composed of immutable layers (diffs). The union filesystem in the runtime stacks them to present a single rootfs."
+  },
+  {
+    "id": "co-run-013",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which kubelet setting selects which container runtime endpoint to connect to?",
+    "options": [
+      {"label": "a", "text": "--container-runtime-endpoint", "correct": true},
+      {"label": "b", "text": "--runtime", "correct": false},
+      {"label": "c", "text": "--container-driver", "correct": false},
+      {"label": "d", "text": "--cri-path", "correct": false}
+    ],
+    "explanation": "The endpoint points at a CRI-compliant socket such as unix:///run/containerd/containerd.sock or unix:///var/run/crio/crio.sock."
+  },
+  {
+    "id": "co-run-014",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which statement about containerd is TRUE?",
+    "options": [
+      {"label": "a", "text": "containerd is a CNCF-graduated container runtime used directly by kubelet via CRI", "correct": true},
+      {"label": "b", "text": "containerd is a CNI plugin", "correct": false},
+      {"label": "c", "text": "containerd replaces etcd", "correct": false},
+      {"label": "d", "text": "containerd is an Ingress controller", "correct": false}
+    ],
+    "explanation": "containerd is a CNCF-graduated industry-standard runtime originally split out of Docker. It talks CRI to kubelet and OCI to runc."
+  },
+  {
+    "id": "co-run-015",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "hard",
+    "question": "Which CNCF project provides a daemon-less, rootless, OCI-compatible CLI commonly used as a Docker alternative on developer machines?",
+    "options": [
+      {"label": "a", "text": "Podman", "correct": true},
+      {"label": "b", "text": "runc", "correct": false},
+      {"label": "c", "text": "CRI-O", "correct": false},
+      {"label": "d", "text": "nerdctl", "correct": false}
+    ],
+    "explanation": "Podman pioneered daemon-less rootless container workflows on Linux with a Docker-compatible CLI."
+  },
+  {
+    "id": "co-run-016",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "Which open-source tool is a minimal, kubelet-focused container runtime designed specifically for Kubernetes (not general docker-like CLI use)?",
+    "options": [
+      {"label": "a", "text": "CRI-O", "correct": true},
+      {"label": "b", "text": "containerd", "correct": false},
+      {"label": "c", "text": "Docker Engine", "correct": false},
+      {"label": "d", "text": "Podman", "correct": false}
+    ],
+    "explanation": "CRI-O was built from the ground up to serve Kubernetes via CRI with a minimal surface area."
+  },
+  {
+    "id": "co-run-017",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "medium",
+    "question": "A container built with `FROM scratch` produces which kind of image?",
+    "options": [
+      {"label": "a", "text": "An image with no base layer; the binary must be statically linked or include its own libraries", "correct": true},
+      {"label": "b", "text": "An image based on Alpine Linux", "correct": false},
+      {"label": "c", "text": "An image with a Windows kernel", "correct": false},
+      {"label": "d", "text": "An image that cannot be pushed to a registry", "correct": false}
+    ],
+    "explanation": "`FROM scratch` starts with an empty filesystem. Go static binaries commonly use it for minimal attack surface."
+  },
+  {
+    "id": "co-run-018",
+    "domain": "container-orchestration",
+    "subtopic": "runtime-cri-oci",
+    "difficulty": "hard",
+    "question": "Why does building a multi-stage Dockerfile often produce a significantly smaller image than a single-stage build?",
+    "options": [
+      {"label": "a", "text": "Only build artifacts are copied into the final stage, dropping compilers and intermediate files", "correct": true},
+      {"label": "b", "text": "It compresses layers twice", "correct": false},
+      {"label": "c", "text": "It uses a different OCI spec", "correct": false},
+      {"label": "d", "text": "It encrypts layers", "correct": false}
+    ],
+    "explanation": "Multi-stage builds let you build in a fat stage and then COPY only the required binaries into a minimal final stage."
+  }
+]

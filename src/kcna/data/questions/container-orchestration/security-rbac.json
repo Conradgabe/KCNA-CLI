@@ -1,0 +1,254 @@
+[
+  {
+    "id": "co-sec-001",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "easy",
+    "question": "Which statement best describes Kubernetes RBAC?",
+    "options": [
+      {"label": "a", "text": "A deny-list of forbidden operations", "correct": false},
+      {"label": "b", "text": "An allow-list that defines which subjects can perform which verbs on which resources", "correct": true},
+      {"label": "c", "text": "A firewall for Pod-to-Pod traffic", "correct": false},
+      {"label": "d", "text": "A mechanism only for auditing", "correct": false}
+    ],
+    "explanation": "RBAC is additive: roles grant verbs on resources, and bindings attach those roles to subjects (users, groups, ServiceAccounts). Nothing is allowed until a role grants it."
+  },
+  {
+    "id": "co-sec-002",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "easy",
+    "question": "Which object binds a Role to subjects within a single namespace?",
+    "options": [
+      {"label": "a", "text": "RoleBinding", "correct": true},
+      {"label": "b", "text": "ClusterRoleBinding", "correct": false},
+      {"label": "c", "text": "RoleSubject", "correct": false},
+      {"label": "d", "text": "PolicyBinding", "correct": false}
+    ],
+    "explanation": "RoleBinding attaches a Role (or ClusterRole) to subjects scoped to a namespace. ClusterRoleBinding binds cluster-wide."
+  },
+  {
+    "id": "co-sec-003",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which feature set replaced the deprecated PodSecurityPolicy?",
+    "options": [
+      {"label": "a", "text": "Pod Security Admission (PSA) enforcing Pod Security Standards (PSS)", "correct": true},
+      {"label": "b", "text": "NetworkPolicy", "correct": false},
+      {"label": "c", "text": "OPA Gatekeeper only", "correct": false},
+      {"label": "d", "text": "SELinux profiles", "correct": false}
+    ],
+    "explanation": "PSP was removed in 1.25. Pod Security Admission enforces the built-in Pod Security Standards (privileged, baseline, restricted) at namespace level."
+  },
+  {
+    "id": "co-sec-004",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which Pod Security Standard level is the most restrictive built-in profile?",
+    "options": [
+      {"label": "a", "text": "privileged", "correct": false},
+      {"label": "b", "text": "baseline", "correct": false},
+      {"label": "c", "text": "restricted", "correct": true},
+      {"label": "d", "text": "strict", "correct": false}
+    ],
+    "explanation": "The three built-in PSS levels are privileged (unrestricted), baseline (prevents known escalations), and restricted (hardened best-practice)."
+  },
+  {
+    "id": "co-sec-005",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which CNCF project enforces policy as code over Kubernetes admission requests using the Rego language?",
+    "options": [
+      {"label": "a", "text": "Open Policy Agent (OPA) / Gatekeeper", "correct": true},
+      {"label": "b", "text": "Falco", "correct": false},
+      {"label": "c", "text": "Cilium", "correct": false},
+      {"label": "d", "text": "Harbor", "correct": false}
+    ],
+    "explanation": "OPA Gatekeeper plugs into Kubernetes admission and enforces Rego-based constraints. It is a common PSA complement."
+  },
+  {
+    "id": "co-sec-006",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which CNCF project provides runtime security by auditing Linux syscalls through eBPF/kernel modules to detect suspicious behavior?",
+    "options": [
+      {"label": "a", "text": "Falco", "correct": true},
+      {"label": "b", "text": "Trivy", "correct": false},
+      {"label": "c", "text": "OPA", "correct": false},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "Falco watches kernel events and emits alerts when rules match (e.g., `shell in container`, `unexpected network connection`)."
+  },
+  {
+    "id": "co-sec-007",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which pair of open-source projects signs and verifies container images?",
+    "options": [
+      {"label": "a", "text": "Cosign / Sigstore", "correct": true},
+      {"label": "b", "text": "Falco / Trivy", "correct": false},
+      {"label": "c", "text": "Helm / Kustomize", "correct": false},
+      {"label": "d", "text": "Harbor / ArgoCD", "correct": false}
+    ],
+    "explanation": "Sigstore (with the Cosign CLI) provides keyless image signing and verification. Many registries now support Cosign-signed artifacts."
+  },
+  {
+    "id": "co-sec-008",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which CNCF tool is a well-known open-source container image vulnerability scanner?",
+    "options": [
+      {"label": "a", "text": "Trivy", "correct": true},
+      {"label": "b", "text": "Falco", "correct": false},
+      {"label": "c", "text": "Gatekeeper", "correct": false},
+      {"label": "d", "text": "Cosign", "correct": false}
+    ],
+    "explanation": "Trivy scans OCI images (and filesystems, IaC, SBOMs) for CVEs and misconfigurations."
+  },
+  {
+    "id": "co-sec-009",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "hard",
+    "question": "Which framework provides a standard cryptographic identity for workloads across heterogeneous environments?",
+    "options": [
+      {"label": "a", "text": "SPIFFE (with SPIRE as its reference implementation)", "correct": true},
+      {"label": "b", "text": "Cert-manager", "correct": false},
+      {"label": "c", "text": "Keycloak", "correct": false},
+      {"label": "d", "text": "Dex", "correct": false}
+    ],
+    "explanation": "SPIFFE defines SVIDs (SPIFFE Verifiable Identity Documents). SPIRE is the open-source server/agent that issues and rotates them."
+  },
+  {
+    "id": "co-sec-010",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which of the following is the CNCF definition of the \"4 C's of Cloud Native Security\"?",
+    "options": [
+      {"label": "a", "text": "CI/CD, Clusters, Containers, Code", "correct": false},
+      {"label": "b", "text": "Cloud, Clusters, Containers, Code", "correct": true},
+      {"label": "c", "text": "Compliance, Clusters, Containers, Code", "correct": false},
+      {"label": "d", "text": "Cloud, Culture, Containers, Code", "correct": false}
+    ],
+    "explanation": "The 4 C's are concentric security layers: Cloud → Cluster → Container → Code. Each layer should be hardened because weaker outer layers can undermine inner ones."
+  },
+  {
+    "id": "co-sec-011",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which ServiceAccount setting should generally be disabled when a Pod does not need to call the Kubernetes API?",
+    "options": [
+      {"label": "a", "text": "automountServiceAccountToken", "correct": true},
+      {"label": "b", "text": "imagePullSecrets", "correct": false},
+      {"label": "c", "text": "secrets", "correct": false},
+      {"label": "d", "text": "namespace", "correct": false}
+    ],
+    "explanation": "Setting automountServiceAccountToken to false prevents the default SA token from being mounted into the Pod, reducing blast radius if the Pod is compromised."
+  },
+  {
+    "id": "co-sec-012",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "What is the idiomatic way to grant a workload access to a cloud provider IAM role without hard-coded static credentials?",
+    "options": [
+      {"label": "a", "text": "Workload identity federation via the Pod's ServiceAccount", "correct": true},
+      {"label": "b", "text": "A long-lived access key stored in a Secret", "correct": false},
+      {"label": "c", "text": "A Pod-level kubeconfig", "correct": false},
+      {"label": "d", "text": "A hostPath mount", "correct": false}
+    ],
+    "explanation": "EKS IRSA, GKE Workload Identity, and AKS Workload Identity all federate short-lived cloud credentials via SA tokens. This avoids long-lived keys in Secrets."
+  },
+  {
+    "id": "co-sec-013",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "easy",
+    "question": "A Pod tries to `kubectl get pods` using its ServiceAccount and receives 403 Forbidden. Which two types of objects are most likely missing?",
+    "options": [
+      {"label": "a", "text": "Role or ClusterRole plus a RoleBinding or ClusterRoleBinding", "correct": true},
+      {"label": "b", "text": "NetworkPolicy and Ingress", "correct": false},
+      {"label": "c", "text": "Deployment and Service", "correct": false},
+      {"label": "d", "text": "PV and PVC", "correct": false}
+    ],
+    "explanation": "RBAC requires a Role/ClusterRole plus a binding to the subject (the Pod's ServiceAccount). Without both, requests are denied."
+  },
+  {
+    "id": "co-sec-014",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "hard",
+    "question": "Which Linux kernel feature can reduce a container's allowed syscalls to a minimal profile at runtime?",
+    "options": [
+      {"label": "a", "text": "seccomp", "correct": true},
+      {"label": "b", "text": "cgroups", "correct": false},
+      {"label": "c", "text": "iptables", "correct": false},
+      {"label": "d", "text": "bpftrace", "correct": false}
+    ],
+    "explanation": "seccomp profiles (including the default RuntimeDefault) restrict which syscalls a container can make."
+  },
+  {
+    "id": "co-sec-015",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which Pod security context field drops ALL Linux capabilities by default?",
+    "options": [
+      {"label": "a", "text": "capabilities.drop: [\"ALL\"]", "correct": true},
+      {"label": "b", "text": "runAsRoot: false", "correct": false},
+      {"label": "c", "text": "fsGroup: 0", "correct": false},
+      {"label": "d", "text": "hostNetwork: false", "correct": false}
+    ],
+    "explanation": "Dropping ALL capabilities and only adding back what the app needs is a standard hardening technique, required by the restricted PSS profile."
+  },
+  {
+    "id": "co-sec-016",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which CNCF registry project provides OCI image hosting with vulnerability scanning and signing integrations?",
+    "options": [
+      {"label": "a", "text": "Harbor", "correct": true},
+      {"label": "b", "text": "Helm", "correct": false},
+      {"label": "c", "text": "Dragonfly", "correct": false},
+      {"label": "d", "text": "OpenFaaS", "correct": false}
+    ],
+    "explanation": "Harbor is a CNCF-graduated registry that integrates policy, scanning (Trivy/Clair), signing (Notary/Cosign), and replication."
+  },
+  {
+    "id": "co-sec-017",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "Which policy approach is typically implemented via Kyverno or OPA Gatekeeper?",
+    "options": [
+      {"label": "a", "text": "Policy as code", "correct": true},
+      {"label": "b", "text": "Pod networking", "correct": false},
+      {"label": "c", "text": "Image building", "correct": false},
+      {"label": "d", "text": "Runtime tracing", "correct": false}
+    ],
+    "explanation": "Kyverno (YAML) and OPA Gatekeeper (Rego) are the two common CNCF policy-as-code admission enforcers."
+  },
+  {
+    "id": "co-sec-018",
+    "domain": "container-orchestration",
+    "subtopic": "security-rbac",
+    "difficulty": "medium",
+    "question": "What is the principle of least privilege as applied to RBAC?",
+    "options": [
+      {"label": "a", "text": "Grant subjects only the verbs and resources they actually need", "correct": true},
+      {"label": "b", "text": "Grant cluster-admin and audit who uses it", "correct": false},
+      {"label": "c", "text": "Rotate cluster-admin weekly", "correct": false},
+      {"label": "d", "text": "Disable RBAC", "correct": false}
+    ],
+    "explanation": "Least privilege is a foundational security principle: grant only what's necessary, and avoid wildcard rules or cluster-admin unless absolutely required."
+  }
+]

@@ -1,0 +1,254 @@
+[
+  {
+    "id": "co-net-001",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "easy",
+    "question": "What does CNI stand for in the Kubernetes ecosystem?",
+    "options": [
+      {"label": "a", "text": "Container Networking Interface", "correct": true},
+      {"label": "b", "text": "Cluster Network Implementation", "correct": false},
+      {"label": "c", "text": "Cloud Native Interconnect", "correct": false},
+      {"label": "d", "text": "Container Name Identifier", "correct": false}
+    ],
+    "explanation": "CNI is a set of specifications and plugins for configuring container network interfaces. Kubernetes uses CNI plugins on each Node to wire up Pod networking."
+  },
+  {
+    "id": "co-net-002",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which CNI plugin is well-known for implementing Kubernetes NetworkPolicy and providing IP-in-IP or BGP-based routing?",
+    "options": [
+      {"label": "a", "text": "Calico", "correct": true},
+      {"label": "b", "text": "Flannel", "correct": false},
+      {"label": "c", "text": "CoreDNS", "correct": false},
+      {"label": "d", "text": "kube-proxy", "correct": false}
+    ],
+    "explanation": "Calico implements L3 networking and natively enforces Kubernetes NetworkPolicies. Flannel alone does not enforce NetworkPolicy."
+  },
+  {
+    "id": "co-net-003",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which CNI plugin relies on eBPF for identity-aware networking and can replace kube-proxy entirely?",
+    "options": [
+      {"label": "a", "text": "Cilium", "correct": true},
+      {"label": "b", "text": "Flannel", "correct": false},
+      {"label": "c", "text": "Weave Net", "correct": false},
+      {"label": "d", "text": "Calico", "correct": false}
+    ],
+    "explanation": "Cilium uses eBPF in the kernel for networking, observability, and security. In kube-proxy-replacement mode it programs Service load balancing directly via eBPF."
+  },
+  {
+    "id": "co-net-004",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "easy",
+    "question": "Which Kubernetes networking rule is always true?",
+    "options": [
+      {"label": "a", "text": "All Pods can reach all other Pods without NAT", "correct": true},
+      {"label": "b", "text": "Pods cannot reach Services", "correct": false},
+      {"label": "c", "text": "Pod IPs are static forever", "correct": false},
+      {"label": "d", "text": "Pods on the same Node cannot reach each other", "correct": false}
+    ],
+    "explanation": "The core Kubernetes networking contract requires flat Pod-to-Pod connectivity without NAT. CNI plugins implement this."
+  },
+  {
+    "id": "co-net-005",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which API is the graduated successor to Ingress that cleanly splits roles for platform operators and application teams?",
+    "options": [
+      {"label": "a", "text": "Gateway API", "correct": true},
+      {"label": "b", "text": "Ingress v2", "correct": false},
+      {"label": "c", "text": "Service Mesh Interface (SMI)", "correct": false},
+      {"label": "d", "text": "API Gateway v1", "correct": false}
+    ],
+    "explanation": "Gateway API (GatewayClass, Gateway, HTTPRoute, TLSRoute, TCPRoute) graduated from SIG-Network and is the modern, role-oriented traffic API."
+  },
+  {
+    "id": "co-net-006",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "In Gateway API, which resource is typically managed by an application developer to attach HTTP rules to a Gateway?",
+    "options": [
+      {"label": "a", "text": "HTTPRoute", "correct": true},
+      {"label": "b", "text": "Gateway", "correct": false},
+      {"label": "c", "text": "GatewayClass", "correct": false},
+      {"label": "d", "text": "TLSListener", "correct": false}
+    ],
+    "explanation": "GatewayClass and Gateway are typically operator-owned. HTTPRoute (and its TLS/TCP/UDP siblings) are attached by app teams to route traffic through an existing Gateway."
+  },
+  {
+    "id": "co-net-007",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "hard",
+    "question": "In Gateway API, which resource defines the infrastructure template — who provides the data plane and with what capabilities?",
+    "options": [
+      {"label": "a", "text": "GatewayClass", "correct": true},
+      {"label": "b", "text": "Gateway", "correct": false},
+      {"label": "c", "text": "HTTPRoute", "correct": false},
+      {"label": "d", "text": "BackendTLSPolicy", "correct": false}
+    ],
+    "explanation": "GatewayClass is the template: vendor, parameters, controller. Gateways reference a GatewayClass and bring it to life for a particular deployment."
+  },
+  {
+    "id": "co-net-008",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which is TRUE about the relationship between kube-proxy and CNI?",
+    "options": [
+      {"label": "a", "text": "kube-proxy handles Service-IP routing; CNI handles Pod-to-Pod connectivity and policy", "correct": true},
+      {"label": "b", "text": "They are the same component", "correct": false},
+      {"label": "c", "text": "kube-proxy is a CNI plugin", "correct": false},
+      {"label": "d", "text": "kube-proxy runs only on the control plane", "correct": false}
+    ],
+    "explanation": "CNI wires Pods onto the Pod network. kube-proxy (or a replacement like Cilium's eBPF mode) makes Service virtual IPs routable by rewriting packets to actual Pod IPs."
+  },
+  {
+    "id": "co-net-009",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which CNCF service-mesh dataplane is based on Envoy proxies injected as sidecars?",
+    "options": [
+      {"label": "a", "text": "Istio", "correct": true},
+      {"label": "b", "text": "CoreDNS", "correct": false},
+      {"label": "c", "text": "Cilium", "correct": false},
+      {"label": "d", "text": "Calico", "correct": false}
+    ],
+    "explanation": "Istio's traditional data plane is Envoy sidecars. Its ambient mode moves to per-node/per-app proxies, but Envoy remains the L7 proxy."
+  },
+  {
+    "id": "co-net-010",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "easy",
+    "question": "Which statement about CNI plugin selection in a cluster is TRUE?",
+    "options": [
+      {"label": "a", "text": "You install exactly one CNI plugin per cluster for the primary Pod network", "correct": true},
+      {"label": "b", "text": "Kubernetes ships with a default CNI plugin", "correct": false},
+      {"label": "c", "text": "kube-proxy replaces the need for a CNI plugin", "correct": false},
+      {"label": "d", "text": "CoreDNS is a CNI plugin", "correct": false}
+    ],
+    "explanation": "Kubernetes ships no default CNI. You install one primary plugin (Calico, Cilium, Flannel, Weave, AWS VPC CNI, etc.); chaining plugins is advanced."
+  },
+  {
+    "id": "co-net-011",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which CNCF project provides multi-interface support for Pods by chaining CNI plugins?",
+    "options": [
+      {"label": "a", "text": "Multus", "correct": true},
+      {"label": "b", "text": "Cilium", "correct": false},
+      {"label": "c", "text": "CoreDNS", "correct": false},
+      {"label": "d", "text": "Calico", "correct": false}
+    ],
+    "explanation": "Multus enables attaching multiple network interfaces to a Pod — commonly used in telecom/NFV workloads."
+  },
+  {
+    "id": "co-net-012",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which is a common advantage of Gateway API over Ingress?",
+    "options": [
+      {"label": "a", "text": "Standardized cross-vendor TLS termination and explicit multi-protocol routes (HTTP/TCP/UDP/TLS)", "correct": true},
+      {"label": "b", "text": "It replaces Services", "correct": false},
+      {"label": "c", "text": "It eliminates the need for a controller", "correct": false},
+      {"label": "d", "text": "It is built into the core API without extensions", "correct": false}
+    ],
+    "explanation": "Gateway API standardizes what Ingress left to vendor-specific annotations and adds explicit multi-protocol route kinds."
+  },
+  {
+    "id": "co-net-013",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "hard",
+    "question": "Which network mode makes a Pod share the host Node's network namespace, exposing host ports directly?",
+    "options": [
+      {"label": "a", "text": "hostNetwork: true", "correct": true},
+      {"label": "b", "text": "hostPID: true", "correct": false},
+      {"label": "c", "text": "hostIPC: true", "correct": false},
+      {"label": "d", "text": "hostPath: true", "correct": false}
+    ],
+    "explanation": "hostNetwork places the Pod in the Node's network namespace. This skips the Pod network entirely and is restricted in most production clusters."
+  },
+  {
+    "id": "co-net-014",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which networking element is responsible for translating the Service's ClusterIP into the IP of a backing Pod at the data plane?",
+    "options": [
+      {"label": "a", "text": "kube-proxy (or its replacement, e.g., Cilium in KPR mode)", "correct": true},
+      {"label": "b", "text": "CoreDNS", "correct": false},
+      {"label": "c", "text": "kubelet", "correct": false},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "kube-proxy programs iptables/ipvs/nftables DNAT rules for Service ClusterIPs. KPR-mode eBPF does the same work in the kernel."
+  },
+  {
+    "id": "co-net-015",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "What does an Ingress controller typically provide beyond the Ingress object itself?",
+    "options": [
+      {"label": "a", "text": "The actual L7 proxy and dynamic configuration engine", "correct": true},
+      {"label": "b", "text": "A CNI plugin", "correct": false},
+      {"label": "c", "text": "An Ingress-specific etcd", "correct": false},
+      {"label": "d", "text": "A Node agent", "correct": false}
+    ],
+    "explanation": "The Ingress controller (NGINX, Traefik, HAProxy, cloud-LB-controller) watches Ingress objects and implements routing with an actual L7 proxy."
+  },
+  {
+    "id": "co-net-016",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which CNI plugin is known for simplicity and uses VXLAN overlays by default without enforcing NetworkPolicy?",
+    "options": [
+      {"label": "a", "text": "Flannel", "correct": true},
+      {"label": "b", "text": "Calico", "correct": false},
+      {"label": "c", "text": "Cilium", "correct": false},
+      {"label": "d", "text": "kube-router", "correct": false}
+    ],
+    "explanation": "Flannel is a simple overlay CNI. It has no native NetworkPolicy support; it is often paired with Calico for that."
+  },
+  {
+    "id": "co-net-017",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which of the following is NOT a valid Gateway API resource?",
+    "options": [
+      {"label": "a", "text": "HTTPRoute", "correct": false},
+      {"label": "b", "text": "TLSRoute", "correct": false},
+      {"label": "c", "text": "UDPRoute", "correct": false},
+      {"label": "d", "text": "IngressRoute", "correct": true}
+    ],
+    "explanation": "IngressRoute is a Traefik vendor CRD, not part of Gateway API. Valid Gateway API Route kinds include HTTPRoute, TLSRoute, TCPRoute, UDPRoute, GRPCRoute."
+  },
+  {
+    "id": "co-net-018",
+    "domain": "container-orchestration",
+    "subtopic": "networking-cni-gatewayapi",
+    "difficulty": "medium",
+    "question": "Which statement best describes how a CNI plugin is invoked?",
+    "options": [
+      {"label": "a", "text": "The container runtime (via kubelet) invokes the CNI binary at Pod network setup and teardown", "correct": true},
+      {"label": "b", "text": "The API server invokes the CNI binary directly", "correct": false},
+      {"label": "c", "text": "CoreDNS invokes CNI for DNS", "correct": false},
+      {"label": "d", "text": "CNI runs as a DaemonSet with no plugin binaries", "correct": false}
+    ],
+    "explanation": "When a Pod sandbox is created, the runtime (e.g., containerd) runs CNI binaries to attach interfaces. On teardown it runs them again to clean up."
+  }
+]

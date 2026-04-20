@@ -1,0 +1,212 @@
+[
+  {
+    "id": "kf-api-001",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which four required fields appear at the top of almost every Kubernetes manifest?",
+    "options": [
+      {"label": "a", "text": "apiVersion, kind, metadata, spec", "correct": true},
+      {"label": "b", "text": "name, image, ports, env", "correct": false},
+      {"label": "c", "text": "namespace, selector, template, rules", "correct": false},
+      {"label": "d", "text": "group, version, resource, subresource", "correct": false}
+    ],
+    "explanation": "apiVersion, kind, metadata, and spec are the canonical top-level fields of a Kubernetes object manifest."
+  },
+  {
+    "id": "kf-api-002",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which field in metadata logically partitions objects for multi-tenancy within a cluster?",
+    "options": [
+      {"label": "a", "text": "namespace", "correct": true},
+      {"label": "b", "text": "labels", "correct": false},
+      {"label": "c", "text": "annotations", "correct": false},
+      {"label": "d", "text": "finalizers", "correct": false}
+    ],
+    "explanation": "Most namespaced resources (Pods, Deployments, Services, etc.) live inside a namespace. Namespaces are the primary in-cluster isolation boundary for names, quotas, and RBAC scope."
+  },
+  {
+    "id": "kf-api-003",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which metadata field is meant for identifying and grouping objects with simple key=value tags used by selectors?",
+    "options": [
+      {"label": "a", "text": "annotations", "correct": false},
+      {"label": "b", "text": "labels", "correct": true},
+      {"label": "c", "text": "finalizers", "correct": false},
+      {"label": "d", "text": "uid", "correct": false}
+    ],
+    "explanation": "Labels are queryable identifiers used by Services, Deployments, and many controllers. Annotations are free-form metadata not intended for queries."
+  },
+  {
+    "id": "kf-api-004",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which metadata field holds arbitrary non-identifying data, often used by tools or operators?",
+    "options": [
+      {"label": "a", "text": "labels", "correct": false},
+      {"label": "b", "text": "annotations", "correct": true},
+      {"label": "c", "text": "selectors", "correct": false},
+      {"label": "d", "text": "ownerReferences", "correct": false}
+    ],
+    "explanation": "Annotations carry structured or unstructured values (build IDs, commit hashes, tool hints). They are not used by selectors."
+  },
+  {
+    "id": "kf-api-005",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which list in an object's metadata links it to its parent and enables cascading deletion?",
+    "options": [
+      {"label": "a", "text": "ownerReferences", "correct": true},
+      {"label": "b", "text": "finalizers", "correct": false},
+      {"label": "c", "text": "labels", "correct": false},
+      {"label": "d", "text": "managedFields", "correct": false}
+    ],
+    "explanation": "ownerReferences link child objects to an owner. When the owner is deleted, garbage collection follows ownerReferences to clean up children."
+  },
+  {
+    "id": "kf-api-006",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which metadata list delays object deletion until each named controller has completed cleanup?",
+    "options": [
+      {"label": "a", "text": "annotations", "correct": false},
+      {"label": "b", "text": "finalizers", "correct": true},
+      {"label": "c", "text": "ownerReferences", "correct": false},
+      {"label": "d", "text": "labels", "correct": false}
+    ],
+    "explanation": "Finalizers block deletion while controllers perform teardown. The API server only completes deletion after the list is empty."
+  },
+  {
+    "id": "kf-api-007",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which two fields together express the API group and version of an object?",
+    "options": [
+      {"label": "a", "text": "apiVersion (e.g., apps/v1)", "correct": true},
+      {"label": "b", "text": "kind", "correct": false},
+      {"label": "c", "text": "resource", "correct": false},
+      {"label": "d", "text": "spec", "correct": false}
+    ],
+    "explanation": "The apiVersion field encodes both the group and the version (e.g., `apps/v1` or `v1` for the core group)."
+  },
+  {
+    "id": "kf-api-008",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which object in the core API v1 is NOT namespaced?",
+    "options": [
+      {"label": "a", "text": "Pod", "correct": false},
+      {"label": "b", "text": "Service", "correct": false},
+      {"label": "c", "text": "Node", "correct": true},
+      {"label": "d", "text": "ConfigMap", "correct": false}
+    ],
+    "explanation": "Node, Namespace, PersistentVolume, ClusterRole, ClusterRoleBinding, and CRDs are cluster-scoped. Most workloads live in namespaces."
+  },
+  {
+    "id": "kf-api-009",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "What pattern is used to extend the Kubernetes API with a new kind plus a controller that reconciles it?",
+    "options": [
+      {"label": "a", "text": "Operator pattern (CRD + controller)", "correct": true},
+      {"label": "b", "text": "Helm chart", "correct": false},
+      {"label": "c", "text": "Ingress class", "correct": false},
+      {"label": "d", "text": "Static manifest", "correct": false}
+    ],
+    "explanation": "The Operator pattern couples a CRD (to define a new kind) with a controller (to act on changes). Many CNCF projects ship operators."
+  },
+  {
+    "id": "kf-api-010",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which REST verb is used to apply a full server-side replacement of an object through the API?",
+    "options": [
+      {"label": "a", "text": "PUT (update)", "correct": true},
+      {"label": "b", "text": "PATCH", "correct": false},
+      {"label": "c", "text": "GET", "correct": false},
+      {"label": "d", "text": "CONNECT", "correct": false}
+    ],
+    "explanation": "PUT is a full object replace. PATCH applies partial updates (JSON Patch, Merge, Strategic Merge, or Apply)."
+  },
+  {
+    "id": "kf-api-011",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "hard",
+    "question": "Which patch type implemented by kube-apiserver tracks field ownership across apply operations?",
+    "options": [
+      {"label": "a", "text": "JSON Patch", "correct": false},
+      {"label": "b", "text": "Merge Patch", "correct": false},
+      {"label": "c", "text": "Strategic Merge Patch", "correct": false},
+      {"label": "d", "text": "Server-Side Apply", "correct": true}
+    ],
+    "explanation": "Server-Side Apply records managedFields so the API server can detect conflicts when multiple clients edit the same fields."
+  },
+  {
+    "id": "kf-api-012",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which kubectl command shows the canonical API schema of a kind, including each field's documentation?",
+    "options": [
+      {"label": "a", "text": "kubectl explain", "correct": true},
+      {"label": "b", "text": "kubectl describe", "correct": false},
+      {"label": "c", "text": "kubectl api-resources", "correct": false},
+      {"label": "d", "text": "kubectl get --schema", "correct": false}
+    ],
+    "explanation": "`kubectl explain` walks the OpenAPI schema, so `kubectl explain pod.spec.containers.resources` prints the nested docs."
+  },
+  {
+    "id": "kf-api-013",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "easy",
+    "question": "Which kubectl command lists all resource kinds (and whether they are namespaced) served by the cluster?",
+    "options": [
+      {"label": "a", "text": "kubectl api-resources", "correct": true},
+      {"label": "b", "text": "kubectl api-versions", "correct": false},
+      {"label": "c", "text": "kubectl get all", "correct": false},
+      {"label": "d", "text": "kubectl explain", "correct": false}
+    ],
+    "explanation": "`kubectl api-resources` prints a table of kinds, short names, API groups, namespace-scoping, and supported verbs."
+  },
+  {
+    "id": "kf-api-014",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which sub-resource endpoint is used to update just the `status` of a Kubernetes object without touching the `spec`?",
+    "options": [
+      {"label": "a", "text": "/status", "correct": true},
+      {"label": "b", "text": "/metadata", "correct": false},
+      {"label": "c", "text": "/spec", "correct": false},
+      {"label": "d", "text": "/state", "correct": false}
+    ],
+    "explanation": "Controllers use the /status subresource so that a write to `.status` does not conflict with user writes to `.spec`."
+  },
+  {
+    "id": "kf-api-015",
+    "domain": "kubernetes-fundamentals",
+    "subtopic": "api-objects",
+    "difficulty": "medium",
+    "question": "Which kind declares a role with permissions confined to a namespace?",
+    "options": [
+      {"label": "a", "text": "Role", "correct": true},
+      {"label": "b", "text": "ClusterRole", "correct": false},
+      {"label": "c", "text": "RoleBinding", "correct": false},
+      {"label": "d", "text": "NamespaceRole", "correct": false}
+    ],
+    "explanation": "Role is namespaced. ClusterRole is cluster-scoped. Bindings grant a subject those permissions in a namespace (RoleBinding) or cluster-wide (ClusterRoleBinding)."
+  }
+]

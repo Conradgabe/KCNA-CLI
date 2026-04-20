@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cna-ss-001",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "easy",
+    "question": "Which CNCF project brings serverless / Functions-as-a-Service semantics to Kubernetes?",
+    "options": [
+      {"label": "a", "text": "Knative", "correct": true},
+      {"label": "b", "text": "Prometheus", "correct": false},
+      {"label": "c", "text": "etcd", "correct": false},
+      {"label": "d", "text": "Harbor", "correct": false}
+    ],
+    "explanation": "Knative provides request-driven (Serving) and event-driven (Eventing) serverless primitives on Kubernetes, including scale-to-zero."
+  },
+  {
+    "id": "cna-ss-002",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "easy",
+    "question": "Which of the following best describes Function-as-a-Service (FaaS)?",
+    "options": [
+      {"label": "a", "text": "Run small units of code on demand, scaling automatically in response to events or requests", "correct": true},
+      {"label": "b", "text": "Build container images in a registry", "correct": false},
+      {"label": "c", "text": "Deploy Virtual Machines", "correct": false},
+      {"label": "d", "text": "Manage Kubernetes Nodes", "correct": false}
+    ],
+    "explanation": "FaaS abstracts the server away: developers ship functions that the platform executes on demand and scales."
+  },
+  {
+    "id": "cna-ss-003",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "medium",
+    "question": "Which Knative component handles request-driven scaling and scale-to-zero for HTTP workloads?",
+    "options": [
+      {"label": "a", "text": "Knative Serving", "correct": true},
+      {"label": "b", "text": "Knative Eventing", "correct": false},
+      {"label": "c", "text": "Knative Functions", "correct": false},
+      {"label": "d", "text": "Knative Operator", "correct": false}
+    ],
+    "explanation": "Knative Serving scales deployments based on incoming traffic and can fully scale down to zero when idle."
+  },
+  {
+    "id": "cna-ss-004",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "medium",
+    "question": "Which of the following is a CNCF project focused on portable event-driven serverless workflows?",
+    "options": [
+      {"label": "a", "text": "Serverless Workflow", "correct": true},
+      {"label": "b", "text": "Harbor", "correct": false},
+      {"label": "c", "text": "Helm", "correct": false},
+      {"label": "d", "text": "etcd", "correct": false}
+    ],
+    "explanation": "CNCF Serverless Workflow defines a declarative DSL for expressing event-driven workflows portable across runtimes."
+  },
+  {
+    "id": "cna-ss-005",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "medium",
+    "question": "Which CNCF-graduated specification standardizes the shape of event data across services and platforms?",
+    "options": [
+      {"label": "a", "text": "CloudEvents", "correct": true},
+      {"label": "b", "text": "SPIFFE", "correct": false},
+      {"label": "c", "text": "OpenMetrics", "correct": false},
+      {"label": "d", "text": "OCI", "correct": false}
+    ],
+    "explanation": "CloudEvents defines a standard envelope (source, type, id, subject, data) so that producers/consumers can interoperate."
+  },
+  {
+    "id": "cna-ss-006",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "medium",
+    "question": "Which is a core benefit of scale-to-zero in serverless runtimes?",
+    "options": [
+      {"label": "a", "text": "Zero compute cost when idle", "correct": true},
+      {"label": "b", "text": "Infinite CPU", "correct": false},
+      {"label": "c", "text": "Elimination of all latency", "correct": false},
+      {"label": "d", "text": "Automatic code rewriting", "correct": false}
+    ],
+    "explanation": "Scale-to-zero stops paying for CPU/memory when there is no work. Cold-start latency is the trade-off."
+  },
+  {
+    "id": "cna-ss-007",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "hard",
+    "question": "Which statement about \"cold start\" is TRUE in serverless runtimes?",
+    "options": [
+      {"label": "a", "text": "The first request after scale-to-zero incurs startup latency as the runtime spins up a Pod", "correct": true},
+      {"label": "b", "text": "Cold start only affects VMs, not containers", "correct": false},
+      {"label": "c", "text": "Cold start is a feature of Prometheus", "correct": false},
+      {"label": "d", "text": "Cold start eliminates cost", "correct": false}
+    ],
+    "explanation": "After scale-to-zero, the platform must provision a new instance to serve the first incoming request. Latency is a known trade-off."
+  },
+  {
+    "id": "cna-ss-008",
+    "domain": "cloud-native-architecture",
+    "subtopic": "serverless-knative",
+    "difficulty": "medium",
+    "question": "Which is NOT an example of a FaaS platform?",
+    "options": [
+      {"label": "a", "text": "Knative", "correct": false},
+      {"label": "b", "text": "OpenFaaS", "correct": false},
+      {"label": "c", "text": "Kubernetes StatefulSet", "correct": true},
+      {"label": "d", "text": "AWS Lambda", "correct": false}
+    ],
+    "explanation": "StatefulSet is a workload resource for stateful applications, not a FaaS platform."
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "id": "cna-as-001",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "easy",
+    "question": "Which Kubernetes autoscaler changes the number of Pod replicas based on metric targets (CPU, memory, custom)?",
+    "options": [
+      {"label": "a", "text": "Horizontal Pod Autoscaler (HPA)", "correct": true},
+      {"label": "b", "text": "Vertical Pod Autoscaler (VPA)", "correct": false},
+      {"label": "c", "text": "Cluster Autoscaler", "correct": false},
+      {"label": "d", "text": "Karpenter", "correct": false}
+    ],
+    "explanation": "HPA scales replica count up or down based on observed metrics vs. target thresholds."
+  },
+  {
+    "id": "cna-as-002",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "easy",
+    "question": "Which autoscaler adjusts the CPU and memory requests/limits of individual Pods over time?",
+    "options": [
+      {"label": "a", "text": "Horizontal Pod Autoscaler (HPA)", "correct": false},
+      {"label": "b", "text": "Vertical Pod Autoscaler (VPA)", "correct": true},
+      {"label": "c", "text": "Cluster Autoscaler", "correct": false},
+      {"label": "d", "text": "Karpenter", "correct": false}
+    ],
+    "explanation": "VPA recommends and optionally applies updated resource requests/limits — scaling each Pod up instead of adding replicas."
+  },
+  {
+    "id": "cna-as-003",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "medium",
+    "question": "Which autoscaler changes the number of Nodes in the cluster in response to pending (unschedulable) Pods?",
+    "options": [
+      {"label": "a", "text": "Cluster Autoscaler", "correct": true},
+      {"label": "b", "text": "HPA", "correct": false},
+      {"label": "c", "text": "VPA", "correct": false},
+      {"label": "d", "text": "Scheduler", "correct": false}
+    ],
+    "explanation": "Cluster Autoscaler adds Nodes when Pods are Pending due to insufficient capacity and removes under-utilized Nodes."
+  },
+  {
+    "id": "cna-as-004",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "medium",
+    "question": "Which CNCF-incubating Node autoscaler uses just-in-time provisioning with instance-type flexibility (originally on AWS, now multi-cloud)?",
+    "options": [
+      {"label": "a", "text": "Karpenter", "correct": true},
+      {"label": "b", "text": "Cluster Autoscaler", "correct": false},
+      {"label": "c", "text": "HPA", "correct": false},
+      {"label": "d", "text": "Descheduler", "correct": false}
+    ],
+    "explanation": "Karpenter picks instance types dynamically based on pending Pod requirements, often improving speed and bin-packing vs. classic Cluster Autoscaler."
+  },
+  {
+    "id": "cna-as-005",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "medium",
+    "question": "Which CNCF project enables event-driven autoscaling of workloads based on external signals (e.g., Kafka lag, queue depth)?",
+    "options": [
+      {"label": "a", "text": "KEDA", "correct": true},
+      {"label": "b", "text": "Karpenter", "correct": false},
+      {"label": "c", "text": "Cluster Autoscaler", "correct": false},
+      {"label": "d", "text": "Harbor", "correct": false}
+    ],
+    "explanation": "KEDA (Kubernetes Event-Driven Autoscaling) wraps HPA so that scalers can consume external signals like queue depth, database offsets, or Prometheus queries."
+  },
+  {
+    "id": "cna-as-006",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "medium",
+    "question": "A team uses HPA on a Deployment but wants to scale from zero when traffic arrives. What do they typically need?",
+    "options": [
+      {"label": "a", "text": "KEDA or Knative, because plain HPA requires at least one replica", "correct": true},
+      {"label": "b", "text": "Nothing; HPA supports scale-to-zero natively", "correct": false},
+      {"label": "c", "text": "VPA", "correct": false},
+      {"label": "d", "text": "Cluster Autoscaler", "correct": false}
+    ],
+    "explanation": "Plain HPA requires at least one replica. KEDA and Knative enable scale-to-zero via event-driven and request-driven activation."
+  },
+  {
+    "id": "cna-as-007",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "medium",
+    "question": "Why can HPA and VPA conflict if both are applied to the same workload on CPU?",
+    "options": [
+      {"label": "a", "text": "HPA scales replicas up when CPU rises; VPA may simultaneously raise CPU requests per Pod, changing the baseline", "correct": true},
+      {"label": "b", "text": "They cannot coexist at all under any circumstance", "correct": false},
+      {"label": "c", "text": "HPA requires VPA", "correct": false},
+      {"label": "d", "text": "VPA replaces HPA by disabling it", "correct": false}
+    ],
+    "explanation": "Using both on the same metric axis can thrash. Either run them on different metrics (e.g., VPA on memory, HPA on CPU) or run VPA in recommend-only mode."
+  },
+  {
+    "id": "cna-as-008",
+    "domain": "cloud-native-architecture",
+    "subtopic": "autoscaling",
+    "difficulty": "easy",
+    "question": "Which Kubernetes API does HPA query by default to retrieve CPU/memory metrics?",
+    "options": [
+      {"label": "a", "text": "metrics.k8s.io (served by metrics-server)", "correct": true},
+      {"label": "b", "text": "core/v1 Pod status", "correct": false},
+      {"label": "c", "text": "kube-apiserver events", "correct": false},
+      {"label": "d", "text": "Fluent Bit", "correct": false}
+    ],
+    "explanation": "metrics-server implements the resource metrics API (metrics.k8s.io) that HPA consumes for CPU and memory."
+  }
+]
