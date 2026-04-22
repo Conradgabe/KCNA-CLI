@@ -29,9 +29,9 @@ class ReviewScreen(Screen):
         yield Vertical(id="review-body")
 
     def on_mount(self) -> None:
-        self._render()
+        self._refresh_body()
 
-    def _render(self) -> None:
+    def _refresh_body(self) -> None:
         body = self.query_one("#review-body", Vertical)
         body.remove_children()
         if not self._wrong:
@@ -81,12 +81,15 @@ class ReviewScreen(Screen):
     def action_next(self) -> None:
         if self._i < len(self._wrong) - 1:
             self._i += 1
-            self._render()
+            self._refresh_body()
 
     def action_prev(self) -> None:
         if self._i > 0:
             self._i -= 1
-            self._render()
+            self._refresh_body()
 
     def action_pop(self) -> None:
-        self.app.pop_screen()
+        if len(self.app.screen_stack) <= 2:
+            self.app.exit()
+        else:
+            self.app.pop_screen()

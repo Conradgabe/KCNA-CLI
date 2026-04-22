@@ -54,6 +54,44 @@ def practice(
     ).run()
 
 
+@app.command()
+def review(
+    session_id: str = typer.Argument(
+        "latest",
+        help="Session id to review, or 'latest' for the most recent attempt.",
+    ),
+) -> None:
+    """Reopen the interactive review screen for a past exam session."""
+    from kcna.models import ExamResult
+    from kcna.persistence import list_sessions, load_session
+    from kcna.scoring import failed_questions
+    from kcna.tui.app import ReviewApp
+
+    if session_id == "latest":
+        sessions = list_sessions()
+        if not sessions:
+            typer.echo("No saved sessions yet. Run `kcna exam` first.")
+            raise typer.Exit(code=1)
+        result = ExamResult.model_validate_json(
+            sessions[0].read_text(encoding="utf-8")
+        )
+    else:
+        result = load_session(session_id)
+        if result is None:
+            typer.echo(f"No session with id {session_id}")
+            raise typer.Exit(code=1)
+
+    wrong = failed_questions(result)
+    if not wrong:
+        typer.echo(
+            f"Session {result.session_id} has no wrong answers to review "
+            f"({result.correct}/{result.total})."
+        )
+        return
+
+    ReviewApp(result).run()
+
+
 @app.command("version")
 def version_cmd() -> None:
     """Print the installed kcna version."""

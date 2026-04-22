@@ -49,3 +49,27 @@ async def test_finish_exam_reaches_results():
         from kcna.tui.screens.results import ResultsScreen
 
         assert isinstance(app.screen, ResultsScreen)
+
+
+@pytest.mark.asyncio
+async def test_review_screen_renders_without_crash():
+    app = ExamApp(seed=7)
+    async with app.run_test() as pilot:
+        await pilot.press("s")
+        await pilot.pause()
+        for _ in range(65):
+            await pilot.press("a")
+            await pilot.pause()
+
+        from kcna.tui.screens.results import ResultsScreen
+        from kcna.tui.screens.review import ReviewScreen
+
+        assert isinstance(app.screen, ResultsScreen)
+        await pilot.press("r")
+        await pilot.pause()
+        assert isinstance(app.screen, ReviewScreen)
+
+        await pilot.press("n")
+        await pilot.pause()
+        await pilot.press("p")
+        await pilot.pause()

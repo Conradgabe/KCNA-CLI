@@ -31,9 +31,9 @@ class PracticeScreen(Screen):
         yield Static("", id="practice-footer")
 
     def on_mount(self) -> None:
-        self._render()
+        self._refresh_body()
 
-    def _render(self) -> None:
+    def _refresh_body(self) -> None:
         body = self.query_one("#practice-body", Vertical)
         body.remove_children()
         if not self._questions:
@@ -97,16 +97,16 @@ class PracticeScreen(Screen):
         if key in valid:
             self._answers[q.id] = key
             self._revealed[q.id] = True
-            self._render()
+            self._refresh_body()
             event.stop()
             event.prevent_default()
 
     def action_next(self) -> None:
         if self._i < len(self._questions) - 1:
             self._i += 1
-            self._render()
+            self._refresh_body()
 
     def action_prev(self) -> None:
         if self._i > 0:
             self._i -= 1
-            self._render()
+            self._refresh_body()
