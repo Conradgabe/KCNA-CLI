@@ -4,7 +4,7 @@
 
 Please do **not** open a public GitHub issue for security problems.
 
-Email **lustrewdynamicsllc@gmail.com** with:
+Email **evobsidianops@gmail.com** with:
 
 - A clear description of the issue
 - Steps to reproduce
